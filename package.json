@@ -1,0 +1,19 @@
+{
+  "name": "email-manual-api",
+  "version": "0.0.1",
+  "description": "Manual Email API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Financial-Times/email-manual-api.git"
+  },
+  "author": "Daniele Zanni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Financial-Times/email-manual-api/issues"
+  },
+  "homepage": "https://github.com/Financial-Times/email-manual-api#readme"
+}
