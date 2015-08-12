@@ -2,6 +2,9 @@
 
 const request = require('request');
 
+const jwt = require('jwt-simple');
+const moment = require('moment');
+
 const config = require('../../config/config');
 
 exports.authenticate = (req, res) => {
@@ -35,14 +38,21 @@ exports.authenticate = (req, res) => {
                 return res.status(500).send({message: profile.error.message});
             }
 
-
-            console.log(profile);
-            res.send({ token: '123' });
+            let token = createJWT(profile.email);
+            res.send({ token: token });
 
 
         });
 
     });
+
+    function createJWT(email) {
+        let payload = {
+            email: email,
+            expire: moment().add(14, 'days').unix()
+        };
+        return jwt.encode(payload, config.tokenSecret);
+    }
 
 };
 
