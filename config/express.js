@@ -4,7 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 
-
 const config = require('./config');
 
 module.exports = () => {
@@ -27,7 +26,7 @@ module.exports = () => {
     //require('../app/routes/__health.server.routes')(app);
     //require('../app/routes/__gtg.server.routes')(app);
 
-    require('../app/routes/authGoogle.server.routes');
+    require('../app/routes/authGoogle.server.routes')(app);
 
     //require('../app/routes/emails.server.routes.js')(app);
     //require('../app/routes/templates.server.routes.js')(app);

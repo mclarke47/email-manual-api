@@ -3,6 +3,7 @@
 const authGoogle = require('../controllers/authGoogle.server.controller');
 
 module.exports = (app) => {
-  app.routes('/auth/google')
+
+    app.route('/auth/google')
     .post(authGoogle.authenticate)
 };
