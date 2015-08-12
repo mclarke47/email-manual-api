@@ -1,6 +1,6 @@
 'use strict';
 
-const fetch = require('node-fetch');
+const request = require('request');
 
 const config = require('../../config/config');
 
@@ -16,31 +16,33 @@ exports.authenticate = (req, res) => {
         grant_type: 'authorization_code'
     };
 
-    fetch(accessTokenUrl, {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Content-Length': new Buffer(params).length
 
-        },
-        body: params
-
-    })
-    .then(response => response.json())
-    .then(json => {
-            console.log(json);
-            res.json(json);
-        })
-    .catch(error => {
-            console.log(error);
+    request.post(accessTokenUrl, { json: true, form: params }, function(err, response, token) {
+        if (err) {
             return res.status(500).send({
                 message: error.message
             });
+        }
+
+        const accessToken = token.access_token;
+
+        let headers = { Authorization: 'Bearer ' + accessToken };
+
+
+        request.get({ url: peopleApiUrl, headers: headers, json: true }, function(err, response, profile) {
+
+            if (profile.error) {
+                return res.status(500).send({message: profile.error.message});
+            }
+
+
+            console.log(profile);
+            res.send({ token: '123' });
+
+
         });
 
-
-
+    });
 
 };
 
