@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 
 const Template = mongoose.model('Template');
+const createJWT = require('../utils/createJWT.server.utils');
 
 
 /** GET /templates **/
@@ -18,6 +19,8 @@ exports.list = (req, res) => {
                 });
             }
             else {
+                let token = createJWT(req.email);
+                res.header('X-Auth', token);
                 res.json(templates);
             }
         });
@@ -34,6 +37,8 @@ exports.create = (req, res) => {
             });
         }
         else {
+            let token = createJWT(req.email);
+            res.header('X-Auth', token);
             res.status(201).json(template);
         }
     });
@@ -42,6 +47,8 @@ exports.create = (req, res) => {
 /** GET /templates/templateId **/
 
 exports.read = (req, res) => {
+    let token = createJWT(req.email);
+    res.header('X-Auth', token);
     res.json(req.template);
 };
 
@@ -61,6 +68,8 @@ exports.patch = (req, res) => {
             });
         }
         else {
+            let token = createJWT(req.email);
+            res.header('X-Auth', token);
             res.json(template);
         }
     });
@@ -81,6 +90,8 @@ exports.update = (req, res) => {
             });
         }
         else {
+            let token = createJWT(req.email);
+            res.header('X-Auth', token);
             res.json(template);
         }
     });
@@ -100,6 +111,8 @@ exports.delete = function(req, res) {
             });
         }
         else {
+            let token = createJWT(req.email);
+            res.header('X-Auth', token);
             res.json(template);
         }
     });
