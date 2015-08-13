@@ -23,7 +23,7 @@ exports.authenticate = (req, res) => {
 
     request.post(accessTokenUrl, { json: true, form: params }, (err, response, token) => {
         if (err) {
-            return res.status(500).send({
+            return res.status(response.statusCode).send({
                 message: err.message
             });
         }
@@ -34,6 +34,12 @@ exports.authenticate = (req, res) => {
 
 
         request.get({ url: peopleApiUrl, headers: headers, json: true }, (err, response, profile) => {
+
+            if (err) {
+                return res.status(response.statusCode).send({
+                    message: err.message
+                });
+            }
 
             if (profile.error) {
                 return res.status(500).send({message: profile.error.message});
