@@ -23,12 +23,14 @@ exports.authenticate = (req, res) => {
 
     request.post(accessTokenUrl, { json: true, form: params }, (err, response, token) => {
         if (err) {
+            console.log('Error getting the access token');
             return res.status(response.statusCode).send({
                 message: err.message
             });
         }
 
         const accessToken = token.access_token;
+        console.log('Access token', accessToken);
 
         let headers = { Authorization: 'Bearer ' + accessToken };
 
@@ -36,12 +38,14 @@ exports.authenticate = (req, res) => {
         request.get({ url: peopleApiUrl, headers: headers, json: true }, (err, response, profile) => {
 
             if (err) {
+                console.log('Error getting the profile', err);
                 return res.status(response.statusCode).send({
                     message: err.message
                 });
             }
 
             if (profile.error) {
+                console.log('Error getting the profile 2', profile.error);
                 return res.status(500).send({message: profile.error.message});
             }
 
