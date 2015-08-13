@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
         payload = jwt.decode(token, config.tokenSecret);
     }
     catch (err) {
-        return res.status(401).send({ message: err.message });
+        return res.status(401).send({ message: 'Invalid Token' });
     }
 
     if (payload.expire <= moment().unix()) {

@@ -76,28 +76,6 @@ exports.patch = (req, res) => {
     });
 };
 
-/** PUT /templates/templateId **/
-
-exports.update = (req, res) => {
-
-    let template = req.template;
-
-    template = extend({ _id: template._id }, req.body);
-
-    template.save((err) => {
-        if (err) {
-            return res.status(400).send({
-                message: err.message
-            });
-        }
-        else {
-            let token = createJWT(req.email);
-            res.header('X-Auth', token);
-            res.json(template);
-        }
-    });
-};
-
 /** DELETE /templates/templateId **/
 
 exports.delete = function(req, res) {
@@ -106,6 +84,7 @@ exports.delete = function(req, res) {
 
     template.remove((err) => {
 
+        /* istanbul ignore if */
         if (err) {
             return res.status(400).send({
                 message: err.message
@@ -128,7 +107,7 @@ exports.templateById = (req, res, next, id) => {
                 message: 'Template ID is invalid'
             });
         }
-
+        /* istanbul ignore if */
         if (err) {
             return res.status(400).send({
                 message: err.message
