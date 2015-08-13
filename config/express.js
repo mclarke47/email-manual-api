@@ -15,7 +15,8 @@ module.exports = () => {
 
     app.use(cors({
         origin: 'http://localhost:8080',
-        credentials: true
+        credentials: true,
+        exposedHeaders: ['X-Auth']
     }));
 
     app.use(bodyParser.urlencoded({
