@@ -8,7 +8,9 @@ module.exports = function() {
     const db = mongoose.connect(config.db);
 
     //require('../app/models/emails.server.model');
-    //require('../app/models/templates.server.model');
+
+    require('../app/models/field.server.model');
+    require('../app/models/template.server.model');
 
     return db;
 };
