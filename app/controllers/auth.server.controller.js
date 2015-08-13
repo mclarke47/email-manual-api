@@ -30,7 +30,7 @@ exports.authenticate = (req, res) => {
         }
 
         const accessToken = token.access_token;
-        console.log('Access token', accessToken);
+        console.log('Token', token);
 
         let headers = { Authorization: 'Bearer ' + accessToken };
 
