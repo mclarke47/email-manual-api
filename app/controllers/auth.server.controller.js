@@ -24,7 +24,7 @@ exports.authenticate = (req, res) => {
     request.post(accessTokenUrl, { json: true, form: params }, (err, response, token) => {
         if (err) {
             return res.status(500).send({
-                message: error.message
+                message: err.message
             });
         }
 
