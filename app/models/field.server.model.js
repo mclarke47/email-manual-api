@@ -15,7 +15,7 @@ const fieldSchema = new Schema({
     type: {
         type: String,
         trim: true,
-        enum: ['textbox', 'wysisyg'],
+        enum: ['textbox', 'wysiwyg'],
         required: 'type cannot be blank'
     },
     options: [Schema.Types.Mixed]

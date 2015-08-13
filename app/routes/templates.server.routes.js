@@ -12,7 +12,6 @@ module.exports = (app) => {
     app.route('/templates/:templateId')
         .get(ensureAuthenticated, templates.read)
         .patch(ensureAuthenticated, templates.patch)
-        .put(ensureAuthenticated, templates.update)
         .delete(ensureAuthenticated, templates.delete);
 
     app.param('templateId', templates.templateById);
