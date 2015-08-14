@@ -85,7 +85,7 @@ module.exports = (app) => {
 
     app.route('/templates')
         /**
-         * @api {get} /templates/ Get all the Templates.
+         * @api {get} /templates Get all the Templates.
          * @apiVersion 0.0.1
          * @apiName GetTemplates
          * @apiGroup Template

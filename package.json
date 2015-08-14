@@ -17,6 +17,10 @@
   "bugs": {
     "url": "https://github.com/Financial-Times/email-manual-api/issues"
   },
+  "apidoc": {
+    "title": "Email Manual APIs",
+    "url": "http://email-webservices.ft.com"
+  },
   "homepage": "https://github.com/Financial-Times/email-manual-api#readme",
   "dependencies": {
     "body-parser": "^1.13.3",
