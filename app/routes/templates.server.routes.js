@@ -20,7 +20,6 @@ module.exports = (app) => {
     /**
      * @apiDefine TemplateParams
      *
-     * @apiParam {ObjectId} _id  The _id of the Template.
      * @apiParam {String} name The name of the Template.
      * @apiParam {String} path The path of the Template.
      * @apiParam {[ObjectId[]]} fields An ordered list of Fields for the template.
@@ -57,6 +56,31 @@ module.exports = (app) => {
             ]
         }]
      *
+     */
+
+    /**
+     * @apiDefine TemplateValidationError
+     *
+     * @apiError BadRequest Template validation failed.
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 400 Bad Request
+     *     {
+     *       "message": "Template validation failed"
+     *     }
+     */
+
+
+    /**
+     * @apiDefine TemplateNotFoundError
+     *
+     * @apiError NotFound Template not found.
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 404 Not Found
+     *     {
+     *       "message": "Template not found"
+     *     }
      */
 
     app.route('/templates')
@@ -113,20 +137,63 @@ module.exports = (app) => {
          *
          * @apiUse TemplateResponse
          *
-         * @apiError ValidationError The posted User object is not valid.
-         *
-         * @apiErrorExample Error-Response:
-         *     HTTP/1.1 400 Bad Request
-         *     {
-             *       "message": "uuid cannot be blank"
-             *     }
+         * @apiUse TemplateValidationError
          */
-
         .post(ensureAuthenticated, templates.create);
 
     app.route('/templates/:templateId')
+
+        /**
+         * @api {get} /templates/:templateId Get Template information.
+         * @apiVersion 0.0.1
+         * @apiName GetTemplate
+         * @apiGroup Template
+         *
+         * @apiUse AuthHeader
+         *
+         * @apiParam {ObjectId} templateId Template unique _id.
+         *
+         * @apiUse TemplateResponse
+         *
+         * @apiUse TemplateNotFoundError
+         *
+         */
         .get(ensureAuthenticated, templates.read)
+
+
+        /**
+         * @api {patch} /templates/:templateId Update Template information.
+         * @apiVersion 0.0.1
+         * @apiName PatchTemplate
+         * @apiGroup Template
+         *
+         * @apiUse AuthHeader
+         *
+         * @apiParam {ObjectId} templateId Template unique _id.
+         * @apiUse TemplateParams
+         *
+         * @apiUse TemplateResponse
+         *
+         * @apiUse TemplateNotFoundError
+         * @apiUse TemplateValidationError
+         *
+         */
         .patch(ensureAuthenticated, templates.patch)
+
+        /**
+         * @api {delete} /templates/:templateId Delete Template information.
+         * @apiVersion 0.0.1
+         * @apiName DeleteTemplate
+         * @apiGroup Template
+         *
+         * @apiUse AuthHeader
+         *
+         * @apiParam {ObjectId} templateId Template unique _id.
+         * @apiUse TemplateResponse
+         *
+         * @apiUse TemplateNotFoundError
+         *
+         */
         .delete(ensureAuthenticated, templates.delete);
 
     app.param('templateId', templates.templateById);

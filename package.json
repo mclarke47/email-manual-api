@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "gulp --harmony test",
-    "start": "node --harmony server.js"
+    "start": "node --harmony server.js",
+    "postinstall": "gulp --harmony postinstall"
   },
   "repository": {
     "type": "git",
