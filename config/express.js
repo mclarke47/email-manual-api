@@ -14,7 +14,7 @@ module.exports = () => {
     app.use(compression());
 
     app.use(cors({
-        origin: 'http://localhost:8080',
+        origin: true,
         credentials: true,
         exposedHeaders: ['X-Auth']
     }));
