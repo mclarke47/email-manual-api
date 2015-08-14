@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "gulp --harmony test",
-    "start": "node --harmony server.js"
+    "start": "node --harmony server.js",
+    "postinstall": "gulp --harmony postinstall"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,10 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Financial-Times/email-manual-api/issues"
+  },
+  "apidoc": {
+    "title": "Email Manual APIs",
+    "url": "http://email-webservices.ft.com"
   },
   "homepage": "https://github.com/Financial-Times/email-manual-api#readme",
   "dependencies": {
