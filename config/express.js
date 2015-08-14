@@ -37,6 +37,8 @@ module.exports = () => {
 
     //require('../app/routes/emails.server.routes.js')(app);
     require('../app/routes/templates.server.routes.js')(app);
+    require('../app/routes/fields.server.routes.js')(app);
+
 
 
     return app;
