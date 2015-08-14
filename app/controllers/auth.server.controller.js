@@ -10,6 +10,10 @@ const peopleApiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect
 
 const domain = 'ft.com';
 
+
+exports.accessTokenUrl = accessTokenUrl;
+exports.peopleApiUrl = peopleApiUrl;
+
 exports.authenticate = (req, res) => {
 
     let params = {
@@ -22,6 +26,8 @@ exports.authenticate = (req, res) => {
 
 
     request.post(accessTokenUrl, { json: true, form: params }, (err, response, token) => {
+
+        /* istanbul ignore if */
         if (err) {
             return res.status(500).send({
                 message: err.message
@@ -29,7 +35,7 @@ exports.authenticate = (req, res) => {
         }
 
         if (token.error) {
-            return res.status(response.statusCode).send({message: token.error.message});
+            return res.status(response.statusCode).send({message: token.error});
         }
 
         const accessToken = token.access_token;
@@ -39,6 +45,7 @@ exports.authenticate = (req, res) => {
 
         request.get({ url: peopleApiUrl, headers: headers, json: true }, (err, response, profile) => {
 
+            /* istanbul ignore next */
             if (err) {
                 return res.status(500).send({
                     message: err.message
