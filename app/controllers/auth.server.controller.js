@@ -63,7 +63,7 @@ exports.authenticate = (req, res) => {
             }
 
             let token = createJWT(email);
-            res.send({ token: token });
+            res.send({ token: token, profile: profile });
 
 
         });
