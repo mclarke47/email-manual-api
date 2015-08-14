@@ -20,7 +20,18 @@ describe('The /auth endpoint', () => {
                 .yields(null, null, {access_token: 'token'});
             sinon
                 .stub(request, 'get')
-                .yields(null, null, {email: 'abc@ft.com'});
+                .yields(null, null, {
+                    email: 'abc@ft.com',
+                    email_verified: "true",
+                    family_name: "First",
+                    given_name: "Last",
+                    hd: "ft.com",
+                    kind: "plus#personOpenIdConnect",
+                    locale: "en-GB",
+                    name: "First Last",
+                    picture: "https://someUrl",
+                    sub: "35325235235325"
+                });
             done();
         });
 
@@ -39,6 +50,7 @@ describe('The /auth endpoint', () => {
                 .expect(200)
                 .end((authErr, authRes) => {
                     (authRes.body).should.have.a.property('token');
+                    (authRes.body).should.have.a.property('profile');
                     done(authErr);
                 });
         });
@@ -147,7 +159,17 @@ describe('The /auth endpoint', () => {
                 .yields(null, null, {access_token: 'token'});
             sinon
                 .stub(request, 'get')
-                .yields(null, null, {email: 'abc@gmail.com'});
+                .yields(null, null, {
+                    email: 'abc@gmail.com',
+                    email_verified: "true",
+                    family_name: "First",
+                    given_name: "Last",
+                    hd: "ft.com",
+                    kind: "plus#personOpenIdConnect",
+                    locale: "en-GB",
+                    name: "First Last",
+                    picture: "https://someUrl",
+                    sub: "35325235235325"});
 
             done();
         });
