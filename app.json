@@ -1,0 +1,25 @@
+{
+  "name":"email-manual-api",
+  "scripts":{},
+  "env":{
+    "GOOGLE_SECRET":{
+      "required":true
+    },
+    "NODE_ENV":{
+      "required":true
+    },
+    "NPM_CONFIG_PRODUCTION":{
+      "required":true
+    },
+    "SENTRY_DSN":{
+      "required":true
+    },
+    "TOKEN_SECRET":{
+      "generator":"secret"
+    }
+  },
+  "addons":[
+    "mongolab",
+    "papertrail"
+  ]
+}
