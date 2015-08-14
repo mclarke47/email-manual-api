@@ -4,6 +4,8 @@ const gulp = require('gulp');
 const mocha = require('gulp-mocha');
 const jshint = require('gulp-jshint');
 const istanbul = require('gulp-istanbul');
+const apidoc = require('gulp-apidoc');
+
 
 
 // Paths
@@ -57,3 +59,11 @@ gulp.task('istanbul', () => {
 
 gulp.task('test', ['setTestEnv', 'lint', 'istanbul']);
 
+gulp.task('apidoc', function(){
+    apidoc.exec({
+        src: "app/",
+        dest: "public/docs/users-lists/"
+    });
+});
+
+gulp.task('postinstall', ['apidoc']);
