@@ -32,6 +32,17 @@ exports.list = (req, res) => {
 
 exports.create = (req, res) => {
     let template = new Template(req.body);
+
+    fs.readFile(template.path, {encoding: 'utf8'}, (err) => {
+
+        if (err) {
+            return res.status(400).send({
+                message: 'There is a problem reading the template source'
+            });
+        }
+
+    });
+
     template.save((err) => {
         if (err) {
             return res.status(400).send({
@@ -56,7 +67,7 @@ exports.read = (req, res) => {
 
         if (err) {
             return res.status(400).send({
-                message: err.message
+                message: 'There is a problem reading the template source'
             });
         }
 
