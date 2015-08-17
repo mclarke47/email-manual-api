@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const fs = require('fs');
 
 const Template = mongoose.model('Template');
 const createJWT = require('../utils/createJWT.server.utils');
@@ -31,6 +32,17 @@ exports.list = (req, res) => {
 
 exports.create = (req, res) => {
     let template = new Template(req.body);
+
+    fs.readFile(template.path, {encoding: 'utf8'}, (err) => {
+
+        if (err) {
+            return res.status(400).send({
+                message: 'There is a problem reading the template source'
+            });
+        }
+
+    });
+
     template.save((err) => {
         if (err) {
             return res.status(400).send({
@@ -48,9 +60,26 @@ exports.create = (req, res) => {
 /** GET /templates/templateId **/
 
 exports.read = (req, res) => {
-    let token = createJWT(req.email);
-    res.header('X-Auth', token);
-    res.json(req.template);
+
+    let template = req.template.toObject();
+
+    fs.readFile(template.path, {encoding: 'utf8'}, (err, fileContent) => {
+
+        if (err) {
+            return res.status(400).send({
+                message: 'There is a problem reading the template source'
+            });
+        }
+
+        let token = createJWT(req.email);
+
+        res.header('X-Auth', token);
+
+        template.body = fileContent;
+
+        res.json(template);
+    });
+
 };
 
 

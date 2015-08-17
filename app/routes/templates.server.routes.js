@@ -32,31 +32,21 @@ module.exports = (app) => {
     * @apiSuccess {String} name  The name of the Template.
     * @apiSuccess {String} path  The path of the Template.
     * @apiSuccess {ObjectId[]} fields   An ordered list of Field Ids.
+    * @apiSuccess {String} body The template body from the file.
     *
     * @apiSuccessExample Success-Response:
     *     HTTP/1.1 200 OK
     *
-    [{
+    {
         "_id":"55ccb875090bff0300e78b63",
         "name":"Breaking News",
         "path":"templates/breaking-news",
         "__v":0,
-        "fields":[
-
-        ]
-    },
-        {
-            "_id":"55ccb821090bff0300e78b62",
-            "name":"Editorial",
-            "path":"templates/editorial",
-            "__v":1,
-            "fields":[
-                "55cde84b310d0203006256ac",
-                "55cde85f310d0203006256ad"
-            ]
-        }]
-     *
-     */
+        "fields":[],
+        "body": "<html>\n    <head></head>\n    <body>\n        <p>This is an example template.</p>\n    </body>\n</html>"
+    }
+    *
+    */
 
     /**
      * @apiDefine TemplateValidationError

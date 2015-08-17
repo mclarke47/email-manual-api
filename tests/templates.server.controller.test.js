@@ -35,7 +35,7 @@ describe('Template CRUD tests:', () => {
 
             template = new Template({
                 name: 'Editorial',
-                path: '/templates/editorial',
+                path: './templates/example.html',
                 fields: [field]
             });
 
@@ -113,6 +113,23 @@ describe('Template CRUD tests:', () => {
             });
     });
 
+    it('should respond with an error if the template path is incorrect when retrieving a template', (done) => {
+
+        template.path = './templates/notExistingTemplate.html';
+
+            agent.post('/templates')
+                .send(template)
+                .expect(400)
+                .set('Authorization', 'Bearer ' + token)
+                .end((templateGetErr, templateGetRes) => {
+
+                    // Set assertion
+                    templateGetRes.body.should.have.a.property('message', 'There is a problem reading the template source');
+
+                    done(templateGetErr);
+
+                });
+    });
 
     it('should be able to get a list of templates', (done) => {
 
@@ -163,6 +180,28 @@ describe('Template CRUD tests:', () => {
 
                     // Set assertion
                     templateGetRes.body.should.have.a.property('name', template.name);
+
+                    done(templateGetErr);
+
+                });
+        });
+    });
+
+
+    it('should respond with an error if the template path is incorrect when retrieving a template', (done) => {
+
+        template.path = './templates/notExistingTemplate.html';
+
+        template.save(() => {
+
+            agent
+                .get('/templates/' + template._id)
+                .expect(400)
+                .set('Authorization', 'Bearer ' + token)
+                .end((templateGetErr, templateGetRes) => {
+
+                    // Set assertion
+                    templateGetRes.body.should.have.a.property('message', 'There is a problem reading the template source');
 
                     done(templateGetErr);
 
