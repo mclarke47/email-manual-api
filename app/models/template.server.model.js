@@ -18,8 +18,17 @@ const templateSchema = new Schema({
         required: 'path cannot be blank'
     },
     fields: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Field'
+        name: {
+            type: String,
+            trim: true,
+            required: 'name cannot be blank'
+        },
+        type: {
+            type: String,
+            trim: true,
+            enum: ['textbox', 'wysiwyg'],
+            required: 'type cannot be blank'
+        }
     }]
 });
 

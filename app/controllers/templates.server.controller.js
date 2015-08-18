@@ -129,9 +129,7 @@ exports.delete = function(req, res) {
 
 exports.templateById = (req, res, next, id) => {
 
-    Template.findOne({ _id: id })
-        .populate('fields')
-        .exec((err, template) => {
+    Template.findOne({ _id: id }, (err, template) => {
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).send({
