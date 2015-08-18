@@ -15,34 +15,32 @@ const moment = require('moment');
 const agent = request.agent(app);
 
 // Models
-const Field = mongoose.model('Field');
 const Template = mongoose.model('Template');
 
-let field, template, token;
+let template, token;
 
 // Template routes tests
 describe('Template CRUD tests:', () => {
 
     beforeEach((done) => {
 
-        field = new Field ({
+        let field = {
             name: 'body',
             type: 'wysiwyg',
             options: []
-        });
+        };
 
-        field.save(() => {
 
-            template = new Template({
-                name: 'Editorial',
-                path: './templates/example.html',
-                fields: [field]
-            });
-
-            done();
+        template = new Template({
+            name: 'Editorial',
+            path: './templates/example.html',
+            fields: [field]
         });
 
         token = createJWT('abc@ft.com');
+
+        done();
+
 
     });
 
@@ -454,10 +452,7 @@ describe('Template CRUD tests:', () => {
 
 
     afterEach((done) => {
-        Template.remove()
-            .exec(() => {
-                Field.remove().exec(done);
-            });
+        Template.remove().exec(done);
     });
 
 });

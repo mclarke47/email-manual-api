@@ -22,8 +22,9 @@ module.exports = (app) => {
      *
      * @apiParam {String} name The name of the Template.
      * @apiParam {String} path The path of the Template.
-     * @apiParam {[ObjectId[]]} fields An ordered list of Fields for the template.
-     *
+     * @apiParam {[ObjectId[]} fields An ordered list of Fields for the template.
+     * @apiParam {String} field.name A unique name for the field in the template.
+     * @apiParam {String="textbox","wysiwyg"} field.type A type for the field.
      */
 
     /**
@@ -31,8 +32,9 @@ module.exports = (app) => {
     * @apiSuccess {ObjectId} _id The Template Object ID.
     * @apiSuccess {String} name  The name of the Template.
     * @apiSuccess {String} path  The path of the Template.
-    * @apiSuccess {ObjectId[]} fields   An ordered list of Field Ids.
-    * @apiSuccess {String} body The template body from the file.
+    * @apiSuccess {Object[]} fields   An ordered list of Fields.
+    * @apiSuccess {String} field.name A unique name for the field in the template.
+    * @apiSuccess {String="textbox","wysiwyg"} field.type A type for the field.    * @apiSuccess {String} body The template body from the file.
     *
     * @apiSuccessExample Success-Response:
     *     HTTP/1.1 200 OK
@@ -96,19 +98,17 @@ module.exports = (app) => {
                 "name":"Breaking News",
                 "path":"templates/breaking-news",
                 "__v":0,
-                "fields":[
-
-                ]
+                "fields":[]
              },
          {
             "_id":"55ccb821090bff0300e78b62",
             "name":"Editorial",
             "path":"templates/editorial",
             "__v":1,
-            "fields":[
-               "55cde84b310d0203006256ac",
-               "55cde85f310d0203006256ad"
-            ]
+            "fields":[{
+                "name": "heading",
+                "type": "textbox"
+            }]
          }]
          *
          *

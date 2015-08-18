@@ -8,32 +8,28 @@ const extend = require('extend');
 // Internal Modules
 const app = require('../server');
 
-const Field = mongoose.model('Field');
 const Template = mongoose.model('Template');
 
-let field, template;
+let template;
 
 
 describe('Template Model Unit Tests:', function() {
 
     beforeEach(function(done) {
 
-        field = new Field ({
+        let field = {
             name: 'body',
             type: 'wysiwyg',
             options: []
+        };
+
+        template = new Template({
+           name: 'Editorial',
+           path: '/templates/editorial',
+           fields: [field]
         });
 
-        field.save(() => {
-
-            template = new Template({
-               name: 'Editorial',
-               path: '/templates/editorial',
-               fields: [field]
-            });
-
-            done();
-        });
+        done();
 
     });
 
@@ -70,10 +66,7 @@ describe('Template Model Unit Tests:', function() {
     });
 
     afterEach((done) => {
-        Template.remove()
-            .exec(() => {
-                Field.remove().exec(done);
-            });
+        Template.remove().exec(done);
     });
 
 });
