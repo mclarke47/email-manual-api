@@ -31,7 +31,7 @@ describe('Template Model Unit Tests:', function() {
            fields: [field]
         });
 
-        template.save((saveErr, saveRes) => {
+        template.save(() => {
 
             email = new Email({
                 template: template._id,

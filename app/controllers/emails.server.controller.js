@@ -22,7 +22,7 @@ exports.list = (req, res) => {
                 });
             }
             else {
-                let token = createJWT(req.email);
+                let token = createJWT(req.userEmail);
                 res.header('X-Auth', token);
                 res.json(emails);
             }
@@ -43,7 +43,7 @@ exports.create = (req, res) => {
             });
         }
         else {
-            let token = createJWT(req.email);
+            let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
             res.status(201).json(email);
         }
@@ -55,13 +55,11 @@ exports.create = (req, res) => {
 
 exports.read = (req, res) => {
 
-    let email = req.email.toObject();
-
-    let token = createJWT(req.email);
+    let token = createJWT(req.userEmail);
 
     res.header('X-Auth', token);
 
-    res.json(email);
+    res.json(req.email);
 
 };
 
@@ -80,7 +78,7 @@ exports.patch = (req, res) => {
             });
         }
         else {
-            let token = createJWT(req.email);
+            let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
             res.json(email);
         }
@@ -100,7 +98,7 @@ exports.delete = function(req, res) {
             });
         }
         else {
-            let token = createJWT(req.email);
+            let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
             res.json(email);
         }
@@ -114,7 +112,9 @@ exports.emailById = (req, res, next, id) => {
         .populate('template')
         .exec((err, email) => {
 
+
         if (!mongoose.Types.ObjectId.isValid(id)) {
+
             return res.status(400).send({
                 message: 'Email ID is invalid'
             });
