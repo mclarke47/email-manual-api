@@ -202,6 +202,58 @@ describe('Email CRUD tests:', () => {
     });
 
 
+    it('should be able to patch an email', (done) => {
+
+        email.save(() => {
+
+            let patchEmail = { template: template._id };
+
+
+            agent
+                .patch('/emails/' + email._id)
+                .set('Authorization', 'Bearer ' + token)
+                .send(patchEmail)
+                .expect(200)
+                .end((emailPatchErr, emailPatchRes) => {
+
+                    if (emailPatchErr) {
+                        done(emailPatchErr);
+                    }
+
+                    // Set assertions
+                    (emailPatchRes.body._id).should.equal(email._id.toString());
+
+                    // Call the assertion callback
+                    done(emailPatchErr);
+                });
+
+        });
+    });
+
+    it('should not be able to  patch an email if an empty name is provided', (done) => {
+
+        email.save(() => {
+
+            let patchEmail = { template: '' };
+
+            agent
+                .patch('/emails/' + email._id)
+                .set('Authorization', 'Bearer ' + token)
+                .send(patchEmail)
+                .expect(400)
+                .end((emailPatchErr, emailPatchRes) => {
+
+                    // Set message assertion
+                    should.exist(emailPatchRes);
+                    (emailPatchRes.body.message).should.equal('Email validation failed');
+
+                    // Handle list save error
+                    done(emailPatchErr);
+
+                });
+
+        });
+    });
 
     it('should not be able to  patch an email if no auth token is provided', (done) => {
 
