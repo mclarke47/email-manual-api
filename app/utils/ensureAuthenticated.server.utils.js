@@ -23,6 +23,6 @@ module.exports = (req, res, next) => {
     if (payload.expire <= moment().unix()) {
         return res.status(401).send({ message: 'Token has expired' });
     }
-    req.email = payload.email;
+    req.userEmail = payload.email;
     next();
 };

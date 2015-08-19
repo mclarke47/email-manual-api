@@ -21,7 +21,7 @@ exports.list = (req, res) => {
                 });
             }
             else {
-                let token = createJWT(req.email);
+                let token = createJWT(req.userEmail);
                 res.header('X-Auth', token);
                 res.json(templates);
             }
@@ -50,7 +50,7 @@ exports.create = (req, res) => {
             });
         }
         else {
-            let token = createJWT(req.email);
+            let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
             res.status(201).json(template);
         }
@@ -71,7 +71,7 @@ exports.read = (req, res) => {
             });
         }
 
-        let token = createJWT(req.email);
+        let token = createJWT(req.userEmail);
 
         res.header('X-Auth', token);
 
@@ -98,7 +98,7 @@ exports.patch = (req, res) => {
             });
         }
         else {
-            let token = createJWT(req.email);
+            let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
             res.json(template);
         }
@@ -120,7 +120,7 @@ exports.delete = function(req, res) {
             });
         }
         else {
-            let token = createJWT(req.email);
+            let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
             res.json(template);
         }

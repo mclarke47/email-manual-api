@@ -56,13 +56,13 @@ exports.authenticate = (req, res) => {
                 return res.status(response.statusCode).send({message: profile.error.message});
             }
 
-            let email = profile.email;
+            let userEmail = profile.email;
 
-            if (!email.endsWith('@'+ domain)) {
+            if (!userEmail.endsWith('@'+ domain)) {
                 return res.status(401).send({message: 'Unauthorized'});
             }
 
-            let token = createJWT(email);
+            let token = createJWT(userEmail);
             res.send({ token: token, profile: profile });
 
 
