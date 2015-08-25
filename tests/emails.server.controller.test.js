@@ -422,6 +422,43 @@ describe('Email CRUD tests:', () => {
         });
     });
 
+    it('allows to specify the a specific pagination returned', (done) => {
+
+
+        // Create a new email
+        let email2 = new Email({
+            template: template._id,
+            parts:[{
+                name: 'body',
+                value: '<p>Some other body</p>'
+            }]
+        });
+
+        // Save the user
+        email.save(() => {
+
+            email2.save(() => {
+
+                // Request the second email
+                agent.get('/emails?pp=1&p=2')
+                    .set('Authorization', 'Bearer ' + token)
+                    .end((gerEmailErr, getEmailRes) => {
+
+                        // Set assertion
+                        getEmailRes.body.should.have.a.lengthOf(1);
+                        (getEmailRes.headers['x-page']).should.equal('2');
+                        (getEmailRes.headers['x-per-page']).should.equal('1');
+                        (getEmailRes.headers['x-total-count']).should.equal('2');
+
+                        // Call the assertion callback
+                        done();
+                    });
+            });
+
+        });
+
+    });
+
     afterEach((done) => {
         Email.remove()
             .exec(() => Template.remove().exec(done));
