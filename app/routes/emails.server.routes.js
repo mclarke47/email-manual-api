@@ -91,6 +91,10 @@ module.exports = (app) => {
      *
      * @apiUse AuthHeader
      *
+     * @apiParam {Number} [p=1]  The pagination page to retrieve.
+     * @apiParam {Number} [pp=100] The number of Users per page to retrieve.
+     * @apiParam {ObjectId} [t] Filter emails by a specific template _id.
+     *
      * @apiSuccess {Object[]} emails The list of Emails.
      * @apiSuccess {ObjectId} email._id The Email Object ID.
      * @apiSuccess {ObjectId} email.template  The Email Template.
@@ -102,32 +106,30 @@ module.exports = (app) => {
      *     HTTP/1.1 200 OK
      *
      [{
-     "_id": {
-             "$oid": "55d4aa36e5351303000a039b"
-         },
-     "template": {
-             "$oid": "55ccb821090bff0300e78b62"
-         },
-     "createdOn": {
-             "$date": "2015-08-19T16:09:26.812Z"
-         },
-     "parts": [
-     {
-         "name": "subject",
-         "value": "subject",
          "_id": {
-             "$oid": "55d4aa36e5351303000a039d"
-         }
-     },
-     {
-         "name": "comment",
-         "value": "comment",
-         "_id": {
-             "$oid": "55d4aa36e5351303000a039c"
-         }
-     }
-     ],
-     "__v": 0
+                 "$oid": "55d4aa36e5351303000a039b"
+             },
+         "template": {
+                 "$oid": "55ccb821090bff0300e78b62"
+             },
+         "createdOn": {
+                 "$date": "2015-08-19T16:09:26.812Z"
+             },
+         "parts": [
+             {
+                 "name": "subject",
+                 "value": "subject",
+                 "_id": {
+                     "$oid": "55d4aa36e5351303000a039d"
+                 }
+             },
+             {
+                 "name": "comment",
+                 "value": "comment",
+                 "_id": {
+                     "$oid": "55d4aa36e5351303000a039c"
+                 }
+         }],
      }]
      *
      *
