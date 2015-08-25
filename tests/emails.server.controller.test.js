@@ -19,7 +19,7 @@ const Template = mongoose.model('Template');
 const Email = mongoose.model('Email');
 
 
-let template, email, token;
+let template, field, email, token;
 
 // Email routes tests
 describe('Email CRUD tests:', () => {
@@ -28,7 +28,7 @@ describe('Email CRUD tests:', () => {
 
         token = createJWT('abc@ft.com');
 
-        let field = {
+        field = {
             name: 'body',
             type: 'wysiwyg',
             options: []
@@ -453,6 +453,50 @@ describe('Email CRUD tests:', () => {
                         // Call the assertion callback
                         done();
                     });
+            });
+
+        });
+
+    });
+
+    it('allows to filter emails by template', (done) => {
+
+        // Create another template
+        let template2 = new Template({
+            name: 'Breaking news',
+            path: './templates/example.html',
+            fields: [field]
+        });
+
+        template2.save(() => {
+
+            let email2 = new Email({
+                template: template2._id,
+                parts: [{
+                    name: 'body',
+                    value: '<p>Some other body</p>'
+                }]
+            });
+
+            // Save the user
+            email.save(() => {
+
+                email2.save(() => {
+
+                    // Request the second email
+                    agent.get('/emails?t=' + template2._id)
+                        .set('Authorization', 'Bearer ' + token)
+                        .end((gerEmailErr, getEmailRes) => {
+
+                            // Set assertion
+                            getEmailRes.body.should.have.a.lengthOf(1);
+                            (getEmailRes.body[0].template._id).should.match(template2._id.toString());
+
+                            // Call the assertion callback
+                            done();
+                        });
+                });
+
             });
 
         });
