@@ -16,7 +16,7 @@ module.exports = () => {
     app.use(cors({
         origin: true,
         credentials: true,
-        exposedHeaders: ['X-Auth']
+        exposedHeaders: ['X-Auth', 'X-Page', 'X-Total-Count', 'X-Per-Page']
     }));
 
     app.use(bodyParser.urlencoded({
