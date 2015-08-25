@@ -12,8 +12,14 @@ const Email = mongoose.model('Email');
 
 exports.list = (req, res) => {
 
-    let page = (Number(req.query.p) > 0 ? Number(req.query.p) : 1) - 1;
-    let perPage = (Number(req.query.pp) > 0 ? Number(req.query.pp) : 100);
+    const page = (Number(req.query.p) > 0 ? Number(req.query.p) : 1) - 1;
+    const perPage = (Number(req.query.pp) > 0 ? Number(req.query.pp) : 100);
+
+    const options = {};
+
+    if (req.query.t) {
+        options.template = req.query.t;
+    }
 
     res.header('X-Page', page + 1);
     res.header('X-Per-Page', perPage);
@@ -23,7 +29,7 @@ exports.list = (req, res) => {
         res.header('X-Total-Count', count);
 
 
-        Email.find({},  { __v: 0 })
+        Email.find(options,  { __v: 0 })
             .limit(perPage)
             .skip(perPage * page)
             .populate('template')
