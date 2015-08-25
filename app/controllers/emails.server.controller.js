@@ -13,7 +13,7 @@ const Email = mongoose.model('Email');
 exports.list = (req, res) => {
 
     const page = (Number(req.query.p) > 0 ? Number(req.query.p) : 1) - 1;
-    const perPage = (Number(req.query.pp) > 0 ? Number(req.query.pp) : 100);
+    const perPage = (Number(req.query.pp) > 0 ? Number(req.query.pp) : 10);
 
     const options = {};
 
