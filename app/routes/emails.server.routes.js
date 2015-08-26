@@ -9,7 +9,7 @@ module.exports = (app) => {
     /**
      * @apiDefine EmailParams
      *
-     * @apiParam {String} name The name of the Email.
+     * @apiParam {String} subject The subject of the Email.
      * @apiParam {ObjectId} template  The Email Template.
      * @apiParam {Object[]} parts  A list of email parts.
      * @apiParam {String} part.name The unique name for the field in the template.
@@ -19,6 +19,7 @@ module.exports = (app) => {
     /**
      * @apiDefine EmailResponse
      * @apiSuccess {ObjectId} _id The Email Object ID.
+     * @apiSuccess {String} subject The subject of the Email.
      * @apiSuccess {ObjectId} template  The Email Template.
      * @apiSuccess {Object[]} parts  A list of email parts.
      * @apiSuccess {String} part.name The unique name for the field in the template.
@@ -28,6 +29,7 @@ module.exports = (app) => {
      *     HTTP/1.1 200 OK
      *
      {
+         "subject": "The email subject",
          "_id": {
              "$oid": "55d4aa36e5351303000a039b"
          },
@@ -97,6 +99,7 @@ module.exports = (app) => {
      *
      * @apiSuccess {Object[]} emails The list of Emails.
      * @apiSuccess {ObjectId} email._id The Email Object ID.
+     * @apiSuccess {ObjectId} email.subject The Email Subject.
      * @apiSuccess {ObjectId} email.template  The Email Template.
      * @apiSuccess {Object[]} email.parts  A list of email parts.
      * @apiSuccess {String} email.part.name The unique name for the field in the template.
@@ -109,6 +112,7 @@ module.exports = (app) => {
          "_id": {
                  "$oid": "55d4aa36e5351303000a039b"
              },
+         "subject": "The email subject",
          "template": {
                  "$oid": "55ccb821090bff0300e78b62"
              },
@@ -138,7 +142,7 @@ module.exports = (app) => {
 
     /**
      * @api {post} /emails/ Create a Email.
-     * @apiVersion 0.0.1
+     * @apiVersion 0.2.0
      * @apiName CreateEmail
      * @apiGroup Email
      *
@@ -155,7 +159,7 @@ module.exports = (app) => {
     app.route('/emails/:emailId')
     /**
      * @api {get} /email/:emailId Get Email information.
-     * @apiVersion 0.0.1
+     * @apiVersion 0.2.0
      * @apiName GetEmail
      * @apiGroup Email
      *
@@ -171,7 +175,7 @@ module.exports = (app) => {
         .get(ensureAuthenticated, emails.read)
     /**
      * @api {patch} /emails/:emailId Update Email information.
-     * @apiVersion 0.0.1
+     * @apiVersion 0.2.0
      * @apiName PatchEmail
      * @apiGroup Email
      *
@@ -189,7 +193,7 @@ module.exports = (app) => {
         .patch(ensureAuthenticated, emails.patch)
     /**
      * @api {delete} /emails/:emailId Delete Email information.
-     * @apiVersion 0.0.1
+     * @apiVersion 0.2.0
      * @apiName DeleteEmail
      * @apiGroup Email
      *

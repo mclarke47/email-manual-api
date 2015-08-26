@@ -172,7 +172,7 @@ module.exports = (app) => {
 
         /**
          * @api {delete} /templates/:templateId Delete Template information.
-         * @apiVersion 0.0.1
+         * @apiVersion 0.2.0
          * @apiName DeleteTemplate
          * @apiGroup Template
          *
