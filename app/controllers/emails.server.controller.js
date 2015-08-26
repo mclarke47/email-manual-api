@@ -30,6 +30,7 @@ exports.list = (req, res) => {
 
 
         Email.find(options,  { __v: 0 })
+            .sort({ updatedOn: 1 })
             .limit(perPage)
             .skip(perPage * page)
             .populate('template')
@@ -90,6 +91,8 @@ exports.patch = (req, res) => {
     let email = req.email;
 
     email = extend(email, req.body);
+
+    email.updatedOn = Date.now();
 
     email.save((saveErr) => {
         if (saveErr) {

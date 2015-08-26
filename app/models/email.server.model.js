@@ -23,6 +23,11 @@ const emailSchema = new Schema({
     createdOn: {
         type: Date,
         default: Date.now
+    },
+    updatedOn: {
+        type: Date,
+        default: Date.now,
+        index: true
     }
 });
 
