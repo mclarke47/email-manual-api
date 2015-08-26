@@ -34,6 +34,7 @@ describe('Template Model Unit Tests:', function() {
         template.save(() => {
 
             email = new Email({
+                subject: 'Email subject',
                 template: template._id,
                 parts:[{
                     name: 'body',

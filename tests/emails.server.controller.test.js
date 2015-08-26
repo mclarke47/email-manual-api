@@ -43,6 +43,7 @@ describe('Email CRUD tests:', () => {
         template.save(() => {
 
             email = new Email({
+                subject: 'Email subject',
                 template: template._id,
                 parts:[{
                     name: 'body',
@@ -427,6 +428,7 @@ describe('Email CRUD tests:', () => {
 
         // Create a new email
         let email2 = new Email({
+            subject: 'Another Email',
             template: template._id,
             parts:[{
                 name: 'body',
@@ -471,6 +473,7 @@ describe('Email CRUD tests:', () => {
         template2.save(() => {
 
             let email2 = new Email({
+                subject: 'Another Email',
                 template: template2._id,
                 parts: [{
                     name: 'body',

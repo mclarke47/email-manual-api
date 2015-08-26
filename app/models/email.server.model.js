@@ -7,6 +7,11 @@ const Schema = mongoose.Schema;
 
 
 const emailSchema = new Schema({
+    subject: {
+        required: 'subject cannot be blank',
+        type: String,
+        trim: true
+    },
     template: {
         required: 'template cannot be blank',
         type: Schema.Types.ObjectId,
