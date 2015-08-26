@@ -30,7 +30,7 @@ exports.list = (req, res) => {
 
 
         Email.find(options,  { __v: 0 })
-            .sort({ updatedOn: 1 })
+            .sort({ updatedOn: -1 })
             .limit(perPage)
             .skip(perPage * page)
             .populate('template')
