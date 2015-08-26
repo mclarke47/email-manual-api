@@ -24,7 +24,7 @@ exports.list = (req, res) => {
     res.header('X-Page', page + 1);
     res.header('X-Per-Page', perPage);
 
-    Email.count({}, (countErr, count) => {
+    Email.count(options, (countErr, count) => {
 
         res.header('X-Total-Count', count);
 
