@@ -20,6 +20,7 @@ describe('Template Model Unit Tests:', function() {
     beforeEach(function(done) {
 
         let field = {
+            label: 'Body',
             name: 'body',
             type: 'wysiwyg',
             options: []

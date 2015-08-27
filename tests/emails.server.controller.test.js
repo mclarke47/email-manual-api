@@ -29,6 +29,7 @@ describe('Email CRUD tests:', () => {
         token = createJWT('abc@ft.com');
 
         field = {
+            label: 'Body',
             name: 'body',
             type: 'wysiwyg',
             options: []

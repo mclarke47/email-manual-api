@@ -25,6 +25,7 @@ describe('Template CRUD tests:', () => {
     beforeEach((done) => {
 
         let field = {
+            label: 'Body',
             name: 'body',
             type: 'wysiwyg',
             options: []
