@@ -18,6 +18,11 @@ const templateSchema = new Schema({
         required: 'path cannot be blank'
     },
     fields: [{
+        label: {
+            type: String,
+            trim: true,
+            required: 'label cannot be blank'
+        },
         name: {
             type: String,
             trim: true,
