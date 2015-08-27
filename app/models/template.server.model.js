@@ -31,7 +31,7 @@ const templateSchema = new Schema({
         type: {
             type: String,
             trim: true,
-            enum: ['textbox', 'wysiwyg'],
+            enum: ['textbox', 'wysiwyg', 'footerWidget', 'authorWidget'],
             required: 'type cannot be blank'
         }
     }]
