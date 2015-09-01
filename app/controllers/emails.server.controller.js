@@ -112,7 +112,7 @@ exports.delete = function(req, res) {
 
     let email = req.email;
 
-    email.remove((removeErr) => {
+    Email.findOneAndRemove({ _id: email._id}, (removeErr) => {
 
         /* istanbul ignore if */
         if (removeErr) {
