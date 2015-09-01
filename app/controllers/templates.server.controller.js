@@ -123,7 +123,7 @@ exports.delete = function(req, res) {
 
     let template = req.template;
 
-    template.remove((removeErr) => {
+    Template.findOneAndRemove({ _id: template._id },(removeErr) => {
 
         /* istanbul ignore if */
         if (removeErr) {
