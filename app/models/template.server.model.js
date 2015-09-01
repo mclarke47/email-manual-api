@@ -28,6 +28,7 @@ const templateSchema = new Schema({
             trim: true,
             required: 'name cannot be blank'
         },
+        options: Schema.Types.Mixed,
         type: {
             type: String,
             trim: true,
