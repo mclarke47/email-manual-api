@@ -14,6 +14,9 @@ module.exports = (app) => {
      * @apiParam {Object[]} parts  A list of email parts.
      * @apiParam {String} part.name The unique name for the field in the template.
      * @apiParam {Mixed} part.value A value associated to the field.
+     * @apiParam {Object} [body] The compiled body of the email.
+     * @apiParam {String} [body.plain] The compiled plain text body of the email.
+     * @apiParam {String} [body.html] The compiled HTML body of the email.
      */
 
     /**
@@ -24,6 +27,9 @@ module.exports = (app) => {
      * @apiSuccess {Object[]} parts  A list of email parts.
      * @apiSuccess {String} part.name The unique name for the field in the template.
      * @apiSuccess {Mixed} part.value A value associated to the field.
+     * @apiSuccess {Object} [body] The compiled body of the email.
+     * @apiSuccess {String} [body.plain] The compiled plain text body of the email.
+     * @apiSuccess {String} [body.html] The compiled HTML body of the email.
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK

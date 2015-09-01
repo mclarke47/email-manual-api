@@ -33,6 +33,16 @@ const emailSchema = new Schema({
         type: Date,
         default: Date.now,
         index: true
+    },
+    body: {
+        plain: {
+            type: String,
+            trim: true
+        },
+        html: {
+            type: String,
+            trim: true
+        }
     }
 });
 
