@@ -29,7 +29,7 @@ exports.list = (req, res) => {
         res.header('X-Total-Count', count);
 
 
-        Email.find(options,  { __v: 0 })
+        Email.find(options,  { __v: 0, body: 0 })
             .sort({ updatedOn: -1 })
             .limit(perPage)
             .skip(perPage * page)
