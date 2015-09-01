@@ -31,6 +31,7 @@ exports.list = (req, res) => {
 /** POST /templates **/
 
 exports.create = (req, res) => {
+
     let template = new Template(req.body);
 
     fs.readFile(template.path, {encoding: 'utf8'}, (err) => {
@@ -41,20 +42,22 @@ exports.create = (req, res) => {
             });
         }
 
+
+        template.save((err) => {
+            if (err) {
+                return res.status(400).send({
+                    message: err.message
+                });
+            }
+            else {
+                let token = createJWT(req.userEmail);
+                res.header('X-Auth', token);
+                return res.status(201).json(template);
+            }
+        });
+
     });
 
-    template.save((err) => {
-        if (err) {
-            return res.status(400).send({
-                message: err.message
-            });
-        }
-        else {
-            let token = createJWT(req.userEmail);
-            res.header('X-Auth', token);
-            res.status(201).json(template);
-        }
-    });
 };
 
 /** GET /templates/templateId **/
@@ -91,17 +94,26 @@ exports.patch = (req, res) => {
 
     template = extend(template, req.body);
 
-    template.save((saveErr) => {
-        if (saveErr) {
+    fs.readFile(template.path, {encoding: 'utf8'}, (err) => {
+
+        if (err) {
             return res.status(400).send({
-                message: saveErr.message
+                message: 'There is a problem reading the template source'
             });
         }
-        else {
-            let token = createJWT(req.userEmail);
-            res.header('X-Auth', token);
-            res.json(template);
-        }
+
+        template.save((saveErr) => {
+            if (saveErr) {
+                return res.status(400).send({
+                    message: saveErr.message
+                });
+            }
+            else {
+                let token = createJWT(req.userEmail);
+                res.header('X-Auth', token);
+                res.json(template);
+            }
+        });
     });
 };
 

@@ -117,9 +117,9 @@ describe('Template CRUD tests:', () => {
         template.path = './templates/notExistingTemplate.html';
 
             agent.post('/templates')
+                .set('Authorization', 'Bearer ' + token)
                 .send(template)
                 .expect(400)
-                .set('Authorization', 'Bearer ' + token)
                 .end((templateGetErr, templateGetRes) => {
 
                     // Set assertion
@@ -301,6 +301,28 @@ describe('Template CRUD tests:', () => {
 
                 });
 
+        });
+    });
+
+    it('should respond with an error if the template path is incorrect when patching a template', (done) => {
+
+        let patchTemplate = { path: './templates/notExistingTemplate.html' };
+
+        template.save(() => {
+
+
+            agent.patch('/templates/' + template._id)
+                .set('Authorization', 'Bearer ' + token)
+                .send(patchTemplate)
+                .expect(400)
+                .end((templateGetErr, templateGetRes) => {
+
+                    // Set assertion
+                    templateGetRes.body.should.have.a.property('message', 'There is a problem reading the template source');
+
+                    done(templateGetErr);
+
+                });
         });
     });
 
