@@ -59,6 +59,14 @@ exports.create = (req, res) => {
 
     let email = new Email(req.body);
 
+    if (email.body && email.body.plain) {
+        //Plain is a read-only property, it cannot be overridden by the client
+        return res.status(400).send({
+            message: 'The plain text body is read-only, it cannot be overridden'
+        });
+
+    }
+
     if (email.body && email.body.html) {
 
         // If there is any html body, add the plaintext body
@@ -103,20 +111,30 @@ exports.read = (req, res) => {
 exports.patch = (req, res) => {
 
     let email = req.email;
+    let requestBody = req.body;
 
-    if (req.body.body && req.body.body.html) {
-
-        // If there is any html body, update the plaintext body
-
-        let plain = htmlToText.fromString(email.body.html, {
-            tables: true
+    if (requestBody.body && requestBody.body.plain) {
+        //Plain is a read-only property, it cannot be overridden by the client
+        return res.status(400).send({
+            message: 'The plain text body is read-only, it cannot be overridden'
         });
-
-        req.body.body.plain = plain;
 
     }
 
-    email = extend(email, req.body);
+    if (requestBody.body && requestBody.body.html) {
+
+        // If there is any html body, update the plaintext body
+
+        let plain = htmlToText.fromString(requestBody.body.html, {
+            tables: true
+        });
+
+        requestBody.body.plain = plain;
+
+    }
+
+    email = extend(email, requestBody);
+
 
     email.updatedOn = Date.now();
 
