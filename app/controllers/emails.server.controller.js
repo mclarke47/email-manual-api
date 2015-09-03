@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const extend = require('extend');
+const htmlToText = require('html-to-text');
 
 const createJWT = require('../utils/createJWT.server.utils');
 
@@ -55,7 +56,20 @@ exports.list = (req, res) => {
 /** POST /emails **/
 
 exports.create = (req, res) => {
+
     let email = new Email(req.body);
+
+    if (email.body && email.body.html) {
+
+        // If there is any html body, add the plaintext body
+
+        let plain = htmlToText.fromString(email.body.html, {
+            tables: true
+        });
+
+        email.body.plain = plain;
+
+    }
 
     email.save((err) => {
         if (err) {
@@ -89,6 +103,18 @@ exports.read = (req, res) => {
 exports.patch = (req, res) => {
 
     let email = req.email;
+
+    if (req.body.body && req.body.body.html) {
+
+        // If there is any html body, update the plaintext body
+
+        let plain = htmlToText.fromString(email.body.html, {
+            tables: true
+        });
+
+        req.body.body.plain = plain;
+
+    }
 
     email = extend(email, req.body);
 
