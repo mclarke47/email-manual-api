@@ -283,6 +283,7 @@ describe('Email CRUD tests:', () => {
 
                     // Set assertions
                     (emailPatchRes.body._id).should.equal(email._id.toString());
+                    (emailPatchRes.body.dirty).should.equal(true);
 
                     // Call the assertion callback
                     done(emailPatchErr);
@@ -310,6 +311,33 @@ describe('Email CRUD tests:', () => {
 
                     // Set assertions
                     (emailPatchRes.body.body.plain).should.match('Some other text');
+
+                    // Call the assertion callback
+                    done(emailPatchErr);
+                });
+
+        });
+    });
+
+    it('should be able to set an email as not dirty', (done) => {
+
+        email.save(() => {
+
+            let patchEmail = { dirty: false };
+
+            agent
+                .patch('/emails/' + email._id)
+                .set('Authorization', 'Bearer ' + token)
+                .send(patchEmail)
+                .expect(200)
+                .end((emailPatchErr, emailPatchRes) => {
+
+                    if (emailPatchErr) {
+                        done(emailPatchErr);
+                    }
+
+                    // Set assertions
+                    (emailPatchRes.body.dirty).should.equal(false);
 
                     // Call the assertion callback
                     done(emailPatchErr);
@@ -622,9 +650,59 @@ describe('Email CRUD tests:', () => {
 
     });
 
+    it('allows to filter emails by the "dirty" property', (done) => {
+
+
+        let email2 = new Email({
+            subject: 'Another Email',
+            template: template._id,
+            parts: [{
+                name: 'body',
+                value: '<p>Some other body</p>'
+            }],
+            dirty: true
+        });
+
+        // Save the user
+        email.save(() => {
+
+            email2.save(() => {
+
+                // Request for the dirty emails
+                agent.get('/emails?dirty')
+                    .set('Authorization', 'Bearer ' + token)
+                    .end((gerEmailErr, getEmailRes) => {
+
+                        // Set assertion
+                        getEmailRes.body.should.have.a.lengthOf(1);
+                        (getEmailRes.body[0]._id).should.match(email2._id.toString());
+
+                        // Request for the not-dirty emails
+                        agent.get('/emails?dirty=false')
+                            .set('Authorization', 'Bearer ' + token)
+                            .end((gerEmailErr, getEmailRes) => {
+
+                                // Set assertion
+                                getEmailRes.body.should.have.a.lengthOf(1);
+                                (getEmailRes.body[0]._id).should.match(email._id.toString());
+
+                                // Call the assertion callback
+                                done();
+                            });
+                    });
+            });
+
+        });
+
+
+    });
+
+
     afterEach((done) => {
         Email.remove()
             .exec(() => Template.remove().exec(done));
     });
+
+
 
 });

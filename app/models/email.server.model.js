@@ -43,7 +43,35 @@ const emailSchema = new Schema({
             type: String,
             trim: true
         }
-    }
+    },
+    dirty: {
+        type: Boolean,
+        default: false,
+        index: true
+    },
+    valid: {
+        type: Boolean,
+        default: false
+    }//,
+    //sent: {
+    //    type: Boolean,
+    //    default: true,
+    //    index: true
+    //},
+    //toSubEdit: {
+    //    type: Boolean,
+    //    default: true,
+    //    index: true
+    //},
+    //subEdited: {
+    //    type: Boolean,
+    //    default: true,
+    //    index: true
+    //},
+    //sendTime: {
+    //    type: Date,
+    //    index: true
+    //}
 });
 
 mongoose.model('Email', emailSchema);

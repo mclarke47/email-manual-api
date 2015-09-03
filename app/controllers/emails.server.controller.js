@@ -22,6 +22,12 @@ exports.list = (req, res) => {
         options.template = req.query.t;
     }
 
+    if (req.query.dirty === '' || req.query.dirty === 'true') {
+        options.dirty = true;
+    } else if (req.query.dirty === 'false') {
+        options.dirty = false;
+    }
+
     res.header('X-Page', page + 1);
     res.header('X-Per-Page', perPage);
 
@@ -131,6 +137,11 @@ exports.patch = (req, res) => {
 
         requestBody.body.plain = plain;
 
+    }
+
+    // We set the email as dirty unless the client specifies that the email is not dirty
+    if (requestBody.dirty !== false) {
+        requestBody.dirty = true;
     }
 
     email = extend(email, requestBody);
