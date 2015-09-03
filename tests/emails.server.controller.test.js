@@ -126,6 +126,43 @@ describe('Email CRUD tests:', () => {
             });
     });
 
+    it('should be able to add the plain text if the email contains an html body', (done) => {
+
+        email.body = {
+            html: "<p>Some body</p>"
+        };
+
+        agent
+            .post('/emails')
+            .set('Authorization', 'Bearer ' + token)
+            .send(email)
+            .expect(201)
+            .end((emailSaveErr) => {
+
+                if (emailSaveErr) {
+                    return done(emailSaveErr);
+                }
+
+                Email.find({})
+                    .exec((emailFindErr, emailFindRes) => {
+
+                        // Handle emails get error
+                        if (emailFindErr) {
+                            return done(emailFindErr);
+                        }
+
+                        // Set assertions
+                        (emailFindRes[0].template).should.match(email.template);
+                        (emailFindRes[0].body.plain).should.match('Some body');
+
+                        done();
+
+                    });
+
+            });
+
+    });
+
     it('should be able to get a list of emails', (done) => {
 
         email.save(() => {
@@ -224,6 +261,35 @@ describe('Email CRUD tests:', () => {
 
                     // Set assertions
                     (emailPatchRes.body._id).should.equal(email._id.toString());
+
+                    // Call the assertion callback
+                    done(emailPatchErr);
+                });
+
+        });
+    });
+
+    it('should be able to update the plain text body when receiving a patch with an HTML body', (done) => {
+
+        email.save(() => {
+
+            let patchEmail = { body: { html: '<p>Some other text</p>' } };
+
+            agent
+                .patch('/emails/' + email._id)
+                .set('Authorization', 'Bearer ' + token)
+                .send(patchEmail)
+                .expect(200)
+                .end((emailPatchErr, emailPatchRes) => {
+
+                    if (emailPatchErr) {
+                        done(emailPatchErr);
+                    }
+
+                    console.log(emailPatchRes.body)
+
+                    // Set assertions
+                    //(emailPatchRes.body.body.plain).should.match('Some other text');
 
                     // Call the assertion callback
                     done(emailPatchErr);

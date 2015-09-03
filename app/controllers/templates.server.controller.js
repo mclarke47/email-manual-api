@@ -2,10 +2,10 @@
 
 const mongoose = require('mongoose');
 const fs = require('fs');
+const extend = require('extend');
 
 const Template = mongoose.model('Template');
 const createJWT = require('../utils/createJWT.server.utils');
-const extend = require('extend');
 
 
 /** GET /templates **/
