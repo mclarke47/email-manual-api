@@ -126,7 +126,29 @@ describe('Email CRUD tests:', () => {
             });
     });
 
-    it('should be able to add the plain text if the email contains an html body', (done) => {
+    it('should return an error if the plain text is serialized when saving an email', (done) => {
+
+        email.body = {
+            plain: "Some body"
+        };
+
+        agent
+            .post('/emails')
+            .set('Authorization', 'Bearer ' + token)
+            .send(email)
+            .expect(400)
+            .end((emailSaveErr, emailSaveRes) => {
+
+                should.exist(emailSaveRes);
+                (emailSaveRes.body.message).should.equal('The plain text body is read-only, it cannot be overridden');
+
+                done(emailSaveErr);
+
+            });
+
+    });
+
+    it('should be able to add the plain text when saving if the email contains an html body', (done) => {
 
         email.body = {
             html: "<p>Some body</p>"
@@ -287,7 +309,7 @@ describe('Email CRUD tests:', () => {
                     }
 
                     // Set assertions
-                    //(emailPatchRes.body.body.plain).should.match('Some other text');
+                    (emailPatchRes.body.body.plain).should.match('Some other text');
 
                     // Call the assertion callback
                     done(emailPatchErr);
@@ -295,6 +317,35 @@ describe('Email CRUD tests:', () => {
 
         });
     });
+
+    it('should return an error if the plain text is serialized when patching an email', (done) => {
+
+        email.save(() => {
+
+            let patchEmail = { body: { plain: 'Some other text' } };
+
+            agent
+                .patch('/emails/' + email._id)
+                .set('Authorization', 'Bearer ' + token)
+                .send(patchEmail)
+                .expect(400)
+                .end((emailPatchErr, emailPatchRes) => {
+
+                    if (emailPatchErr) {
+                        done(emailPatchErr);
+                    }
+
+                    // Set assertions
+                    (emailPatchRes.body.message).should.match('The plain text body is read-only, it cannot be overridden');
+
+                    // Call the assertion callback
+                    done(emailPatchErr);
+                });
+
+        });
+
+    });
+
 
     it('should not be able to  patch an email if an empty name is provided', (done) => {
 
