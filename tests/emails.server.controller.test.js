@@ -286,8 +286,6 @@ describe('Email CRUD tests:', () => {
                         done(emailPatchErr);
                     }
 
-                    console.log(emailPatchRes.body)
-
                     // Set assertions
                     //(emailPatchRes.body.body.plain).should.match('Some other text');
 
