@@ -17,6 +17,8 @@ module.exports = (app) => {
      * @apiParam {Object} [body] The compiled body of the email.
      * @apiParam {String} [body.plain] The compiled plain text body of the email.
      * @apiParam {String} [body.html] The compiled HTML body of the email.
+     * @apiParam {Boolean} dirty An email is dirty once it has been edited once
+     * @apiParam {Boolean} valid An email is valid if its parts pass validation
      */
 
     /**
@@ -30,6 +32,9 @@ module.exports = (app) => {
      * @apiSuccess {Object} [body] The compiled body of the email.
      * @apiSuccess {String} [body.plain] The compiled plain text body of the email.
      * @apiSuccess {String} [body.html] The compiled HTML body of the email.
+     * @apiSuccess {Boolean} dirty An email is dirty once it has been edited once
+     * @apiSuccess {Boolean} valid An email is valid if its parts pass validation
+     *
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -102,6 +107,8 @@ module.exports = (app) => {
      * @apiParam {Number} [p=1]  The pagination page to retrieve.
      * @apiParam {Number} [pp=100] The number of Users per page to retrieve.
      * @apiParam {ObjectId} [t] Filter emails by a specific template _id.
+     * @apiParam {Boolean} [dirty] Filter emails by the dirty status.
+
      *
      * @apiSuccess {Object[]} emails The list of Emails.
      * @apiSuccess {ObjectId} email._id The Email Object ID.
@@ -110,6 +117,8 @@ module.exports = (app) => {
      * @apiSuccess {Object[]} email.parts  A list of email parts.
      * @apiSuccess {String} email.part.name The unique name for the field in the template.
      * @apiSuccess {Mixed} email.part.value A value associated to the field.
+     * @apiSuccess {Boolean} email.dirty An email is dirty once it has been edited once
+     * @apiSuccess {Boolean} email.valid An email is valid if its parts pass validation     *
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
