@@ -4,6 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
+const cacheResponseDirective = require('express-cache-response-directive');
+
 
 const config = require('./config');
 
@@ -27,6 +29,8 @@ module.exports = () => {
     app.use(bodyParser.json({
         limit:'1mb'
     }));
+
+    app.use(cacheResponseDirective());
 
     app.use(express.static('./public'));
 

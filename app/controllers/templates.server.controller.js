@@ -23,6 +23,8 @@ exports.list = (req, res) => {
             else {
                 let token = createJWT(req.userEmail);
                 res.header('X-Auth', token);
+                res.cacheControl({ noStore: true });
+
                 res.json(templates);
             }
         });
@@ -52,6 +54,8 @@ exports.create = (req, res) => {
             else {
                 let token = createJWT(req.userEmail);
                 res.header('X-Auth', token);
+                res.cacheControl({ noStore: true });
+
                 return res.status(201).json(template);
             }
         });
@@ -77,6 +81,7 @@ exports.read = (req, res) => {
         let token = createJWT(req.userEmail);
 
         res.header('X-Auth', token);
+        res.cacheControl({ noStore: true });
 
         template.body = fileContent;
 
@@ -111,6 +116,8 @@ exports.patch = (req, res) => {
             else {
                 let token = createJWT(req.userEmail);
                 res.header('X-Auth', token);
+                res.cacheControl({ noStore: true });
+
                 res.json(template);
             }
         });
@@ -134,6 +141,8 @@ exports.delete = function(req, res) {
         else {
             let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
+            res.cacheControl({ noStore: true });
+
             res.json(template);
         }
     });
