@@ -59,17 +59,22 @@ describe('Email CRUD tests:', () => {
 
     });
 
+    /** POST /emails **/
+
     it('should be able to save an email', (done) => {
         agent
             .post('/emails')
             .set('Authorization', 'Bearer ' + token)
             .send(email)
             .expect(201)
-            .end((emailSaveErr) => {
+            .end((emailSaveErr, emailSaveRes) => {
 
                 if (emailSaveErr) {
                     return done(emailSaveErr);
                 }
+
+                (emailSaveRes.headers['cache-control']).should.equal('no-cache, no-store');
+
 
                 Email.find({})
                     .exec((emailFindErr, emailFindRes) => {
@@ -185,6 +190,8 @@ describe('Email CRUD tests:', () => {
 
     });
 
+    /** GET /emails **/
+
     it('should be able to get a list of emails', (done) => {
 
         email.save(() => {
@@ -195,6 +202,7 @@ describe('Email CRUD tests:', () => {
                 .end((emailsGetErr, emailsGetRes) => {
 
                     // Set assertion
+                    (emailsGetRes.headers['cache-control']).should.equal('no-cache, no-store');
                     emailsGetRes.body.should.have.a.lengthOf(1);
 
                     done(emailsGetErr);
@@ -223,6 +231,8 @@ describe('Email CRUD tests:', () => {
         });
     });
 
+    /** GET /emails/:emailId **/
+
     it('should be able to get a single email', (done) => {
 
         email.save(() => {
@@ -233,6 +243,7 @@ describe('Email CRUD tests:', () => {
                 .end((emailGetErr, emailGetRes) => {
 
                     // Set assertion
+                    (emailGetRes.headers['cache-control']).should.equal('no-cache, no-store');
                     emailGetRes.body.should.have.a.property('template');
 
                     done(emailGetErr);
@@ -262,6 +273,7 @@ describe('Email CRUD tests:', () => {
         });
     });
 
+    /** PATCH /emails/:emailId **/
 
     it('should be able to patch an email', (done) => {
 
@@ -282,6 +294,7 @@ describe('Email CRUD tests:', () => {
                     }
 
                     // Set assertions
+                    (emailPatchRes.headers['cache-control']).should.equal('no-cache, no-store');
                     (emailPatchRes.body._id).should.equal(email._id.toString());
                     (emailPatchRes.body.dirty).should.equal(true);
 
@@ -400,7 +413,7 @@ describe('Email CRUD tests:', () => {
         });
     });
 
-    it('should not be able to  patch an email if no auth token is provided', (done) => {
+    it('should not be able to patch an email if no auth token is provided', (done) => {
 
         email.save(() => {
 
@@ -421,6 +434,8 @@ describe('Email CRUD tests:', () => {
         });
     });
 
+    /** DELETE /emails/:emailId **/
+
     it('should be able to delete a email', (done) => {
 
         email.save(() => {
@@ -430,11 +445,13 @@ describe('Email CRUD tests:', () => {
                 .set('Authorization', 'Bearer ' + token)
                 .send(email)
                 .expect(200)
-                .end((emailSaveErr) => {
+                .end((emailDelErr, emailDelRes) => {
 
-                    if (emailSaveErr) {
-                        return done(emailSaveErr);
+                    if (emailDelErr) {
+                        return done(emailDelErr);
                     }
+
+                    (emailDelRes.headers['cache-control']).should.equal('no-cache, no-store');
 
                     Email.find({})
                         .exec((emailFindErr, emailFindRes) => {
@@ -693,7 +710,6 @@ describe('Email CRUD tests:', () => {
             });
 
         });
-
 
     });
 

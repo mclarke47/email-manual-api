@@ -51,6 +51,8 @@ exports.list = (req, res) => {
                 else {
                     let token = createJWT(req.userEmail);
                     res.header('X-Auth', token);
+                    res.cacheControl({ noStore: true });
+
                     res.json(emails);
                 }
             });
@@ -94,6 +96,8 @@ exports.create = (req, res) => {
         else {
             let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
+            res.cacheControl({ noStore: true });
+
             res.status(201).json(email);
         }
     });
@@ -107,6 +111,7 @@ exports.read = (req, res) => {
     let token = createJWT(req.userEmail);
 
     res.header('X-Auth', token);
+    res.cacheControl({ noStore: true });
 
     res.json(req.email);
 
@@ -158,6 +163,8 @@ exports.patch = (req, res) => {
         else {
             let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
+            res.cacheControl({ noStore: true });
+
             res.json(email);
         }
     });
@@ -178,6 +185,8 @@ exports.delete = function(req, res) {
         else {
             let token = createJWT(req.userEmail);
             res.header('X-Auth', token);
+            res.cacheControl({ noStore: true });
+
             res.json(email);
         }
     });

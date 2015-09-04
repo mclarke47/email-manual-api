@@ -45,17 +45,21 @@ describe('Template CRUD tests:', () => {
 
     });
 
+    /** POST /templates **/
+
     it('should be able to save a template', (done) => {
         agent
             .post('/templates')
             .set('Authorization', 'Bearer ' + token)
             .send(template)
             .expect(201)
-            .end((templateSaveErr) => {
+            .end((templateSaveErr, templateSaveRes) => {
 
                 if (templateSaveErr) {
                     return done(templateSaveErr);
                 }
+
+                (templateSaveRes.headers['cache-control']).should.equal('no-cache, no-store');
 
                 Template.find({})
                     .exec((templateFindErr, templateFindRes) => {
@@ -112,7 +116,7 @@ describe('Template CRUD tests:', () => {
             });
     });
 
-    it('should respond with an error if the template path is incorrect when retrieving a template', (done) => {
+    it('should respond with an error if the template path is incorrect when saving a template', (done) => {
 
         template.path = './templates/notExistingTemplate.html';
 
@@ -130,6 +134,8 @@ describe('Template CRUD tests:', () => {
                 });
     });
 
+    /** GET /templates **/
+
     it('should be able to get a list of templates', (done) => {
 
         template.save(() => {
@@ -140,6 +146,7 @@ describe('Template CRUD tests:', () => {
                 .end((templatesGetErr, templatesGetRes) => {
 
                     // Set assertion
+                    (templatesGetRes.headers['cache-control']).should.equal('no-cache, no-store');
                     templatesGetRes.body.should.have.a.lengthOf(1);
 
                     done(templatesGetErr);
@@ -168,6 +175,9 @@ describe('Template CRUD tests:', () => {
         });
     });
 
+
+    /** GET /templates/:templateId **/
+
     it('should be able to get a single template', (done) => {
 
         template.save(() => {
@@ -178,6 +188,7 @@ describe('Template CRUD tests:', () => {
                 .end((templateGetErr, templateGetRes) => {
 
                     // Set assertion
+                    (templateGetRes.headers['cache-control']).should.equal('no-cache, no-store');
                     templateGetRes.body.should.have.a.property('name', template.name);
 
                     done(templateGetErr);
@@ -229,6 +240,8 @@ describe('Template CRUD tests:', () => {
     });
 
 
+    /** PATCH /templates/:templateId **/
+
     it('should be able to patch a template', (done) => {
 
         template.save(() => {
@@ -248,6 +261,7 @@ describe('Template CRUD tests:', () => {
                     }
 
                     // Set assertions
+                    (templatePatchRes.headers['cache-control']).should.equal('no-cache, no-store');
                     (templatePatchRes.body._id).should.equal(template._id.toString());
                     (templatePatchRes.body.name).should.equal(patchTemplate.name);
 
@@ -326,6 +340,8 @@ describe('Template CRUD tests:', () => {
         });
     });
 
+    /** DELETE /templates/:templateId **/
+
     it('should be able to delete a template', (done) => {
 
         template.save(() => {
@@ -335,10 +351,12 @@ describe('Template CRUD tests:', () => {
                 .set('Authorization', 'Bearer ' + token)
                 .send(template)
                 .expect(200)
-                .end((templateSaveErr) => {
+                .end((templateDeleteErr, templateDeleteRes) => {
 
-                    if (templateSaveErr) {
-                        return done(templateSaveErr);
+                    (templateDeleteRes.headers['cache-control']).should.equal('no-cache, no-store');
+
+                    if (templateDeleteErr) {
+                        return done(templateDeleteErr);
                     }
 
                     Template.find({})
@@ -382,7 +400,7 @@ describe('Template CRUD tests:', () => {
     });
 
 
-    it('returns an error if an invalid _id is provided', (done) => {
+    it('returns an error if a wrongly formatted _id is provided when retrieving a template', (done) => {
         template.save(() => {
             agent
                 .get('/templates/' + 'invalidId')
@@ -401,7 +419,7 @@ describe('Template CRUD tests:', () => {
         });
     });
 
-    it('returns an error if an invalid _id is provided', (done) => {
+    it('returns an error if an invalid _id is provided when retrieving a template', (done) => {
 
         let randomId = '55c8861dfdf6f00300b9f89a';
 
@@ -445,7 +463,7 @@ describe('Template CRUD tests:', () => {
         });
     });
 
-    it('returns an error if an expired jwt is provided', (done) => {
+    it('returns an error if an expired jwt is provided when retrieving a template', (done) => {
 
         let payload = {
             email: 'abc@ft.com',
@@ -471,7 +489,6 @@ describe('Template CRUD tests:', () => {
 
         });
     });
-
 
 
     afterEach((done) => {
