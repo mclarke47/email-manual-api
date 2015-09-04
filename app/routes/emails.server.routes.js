@@ -17,8 +17,13 @@ module.exports = (app) => {
      * @apiParam {Object} [body] The compiled body of the email.
      * @apiParam {String} [body.plain] The compiled plain text body of the email.
      * @apiParam {String} [body.html] The compiled HTML body of the email.
-     * @apiParam {Boolean} dirty An email is dirty once it has been edited once
-     * @apiParam {Boolean} valid An email is valid if its parts pass validation
+     * @apiParam {Boolean} [dirty=false] An email is dirty once it has been edited once
+     * @apiParam {Boolean} [valid=false] An email is valid if its parts pass validation
+     * @apiParam {Boolean} [sent=false] An email is sent if it has been sent
+     * @apiParam {Boolean} [toSubEdit=false] An email is toSubEdit if it is ready to be subEdited
+     * @apiParam {Boolean} [subEdited=false] An email is subEdited if it has already been subEdited
+     * @apiParam {Date} [sendTime] The time at which an email has to be sent
+
      */
 
     /**
@@ -32,8 +37,12 @@ module.exports = (app) => {
      * @apiSuccess {Object} [body] The compiled body of the email.
      * @apiSuccess {String} [body.plain] The compiled plain text body of the email.
      * @apiSuccess {String} [body.html] The compiled HTML body of the email.
-     * @apiSuccess {Boolean} dirty An email is dirty once it has been edited once
-     * @apiSuccess {Boolean} valid An email is valid if its parts pass validation
+     * @apiSuccess {Boolean} [dirty=false] An email is dirty once it has been edited once
+     * @apiSuccess {Boolean} [valid=false] An email is valid if its parts pass validation
+     * @apiSuccess {Boolean} [sent=false] An email is sent if it has been sent
+     * @apiSuccess {Boolean} [toSubEdit=false] An email is toSubEdit if it is ready to be subEdited
+     * @apiSuccess {Boolean} [subEdited=false] An email is subEdited if it has already been subEdited
+     * @apiSuccess {Date} [sendTime] The time at which an email has to be sent
      *
      *
      * @apiSuccessExample Success-Response:
@@ -117,8 +126,12 @@ module.exports = (app) => {
      * @apiSuccess {Object[]} email.parts  A list of email parts.
      * @apiSuccess {String} email.part.name The unique name for the field in the template.
      * @apiSuccess {Mixed} email.part.value A value associated to the field.
-     * @apiSuccess {Boolean} email.dirty An email is dirty once it has been edited once
-     * @apiSuccess {Boolean} email.valid An email is valid if its parts pass validation     *
+     * @apiSuccess {Boolean} [email.dirty=false] An email is dirty once it has been edited once
+     * @apiSuccess {Boolean} [email.valid=false] An email is valid if its parts pass validation
+     * @apiSuccess {Boolean} [email.sent=false] An email is sent if it has been sent
+     * @apiSuccess {Boolean} [email.toSubEdit=false] An email is toSubEdit if it is ready to be subEdited
+     * @apiSuccess {Boolean} [email.subEdited=false] An email is subEdited if it has already been subEdited
+     * @apiSuccess {Date} [email.sendTime] The time at which an email has to be sent
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK

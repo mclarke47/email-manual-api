@@ -698,6 +698,186 @@ describe('Email CRUD tests:', () => {
     });
 
 
+    it('allows to filter emails by the "sent" property', (done) => {
+
+
+        let email2 = new Email({
+            subject: 'Another Email',
+            template: template._id,
+            parts: [{
+                name: 'body',
+                value: '<p>Some other body</p>'
+            }],
+            sent: true
+        });
+
+        // Save the user
+        email.save(() => {
+
+            email2.save(() => {
+
+                // Request for the sent emails
+                agent.get('/emails?sent')
+                    .set('Authorization', 'Bearer ' + token)
+                    .end((gerEmailErr, getEmailRes) => {
+
+                        // Set assertion
+                        getEmailRes.body.should.have.a.lengthOf(1);
+                        (getEmailRes.body[0]._id).should.match(email2._id.toString());
+
+                        // Request for the not-sent emails
+                        agent.get('/emails?sent=false')
+                            .set('Authorization', 'Bearer ' + token)
+                            .end((gerEmailErr, getEmailRes) => {
+
+                                // Set assertion
+                                getEmailRes.body.should.have.a.lengthOf(1);
+                                (getEmailRes.body[0]._id).should.match(email._id.toString());
+
+                                // Call the assertion callback
+                                done();
+                            });
+                    });
+            });
+
+        });
+
+
+    });
+
+    it('allows to filter emails by the "toSubEdit" property', (done) => {
+
+
+        let email2 = new Email({
+            subject: 'Another Email',
+            template: template._id,
+            parts: [{
+                name: 'body',
+                value: '<p>Some other body</p>'
+            }],
+            toSubEdit: true
+        });
+
+        // Save the user
+        email.save(() => {
+
+            email2.save(() => {
+
+                // Request for the toSubEdit emails
+                agent.get('/emails?toSubEdit')
+                    .set('Authorization', 'Bearer ' + token)
+                    .end((gerEmailErr, getEmailRes) => {
+
+                        // Set assertion
+                        getEmailRes.body.should.have.a.lengthOf(1);
+                        (getEmailRes.body[0]._id).should.match(email2._id.toString());
+
+                        // Request for the not-toSubEdit emails
+                        agent.get('/emails?toSubEdit=false')
+                            .set('Authorization', 'Bearer ' + token)
+                            .end((gerEmailErr, getEmailRes) => {
+
+                                // Set assertion
+                                getEmailRes.body.should.have.a.lengthOf(1);
+                                (getEmailRes.body[0]._id).should.match(email._id.toString());
+
+                                // Call the assertion callback
+                                done();
+                            });
+                    });
+            });
+
+        });
+
+
+    });
+
+
+    it('allows to filter emails by the "subEdited" property', (done) => {
+
+
+        let email2 = new Email({
+            subject: 'Another Email',
+            template: template._id,
+            parts: [{
+                name: 'body',
+                value: '<p>Some other body</p>'
+            }],
+            subEdited: true
+        });
+
+        // Save the user
+        email.save(() => {
+
+            email2.save(() => {
+
+                // Request for the subEdited emails
+                agent.get('/emails?subEdited')
+                    .set('Authorization', 'Bearer ' + token)
+                    .end((gerEmailErr, getEmailRes) => {
+
+                        // Set assertion
+                        getEmailRes.body.should.have.a.lengthOf(1);
+                        (getEmailRes.body[0]._id).should.match(email2._id.toString());
+
+                        // Request for the not-subEdited emails
+                        agent.get('/emails?subEdited=false')
+                            .set('Authorization', 'Bearer ' + token)
+                            .end((gerEmailErr, getEmailRes) => {
+
+                                // Set assertion
+                                getEmailRes.body.should.have.a.lengthOf(1);
+                                (getEmailRes.body[0]._id).should.match(email._id.toString());
+
+                                // Call the assertion callback
+                                done();
+                            });
+                    });
+            });
+
+        });
+
+
+    });
+
+    it('allows to filter emails that need to be sent now', (done) => {
+
+
+        let email2 = new Email({
+            subject: 'Another Email',
+            template: template._id,
+            parts: [{
+                name: 'body',
+                value: '<p>Some other body</p>'
+            }],
+            sendTime: Date.now()
+        });
+
+        // Save the user
+        email.save(() => {
+
+            email2.save(() => {
+
+                // Request for the emails toSend
+                agent.get('/emails?toSend')
+                    .set('Authorization', 'Bearer ' + token)
+                    .end((gerEmailErr, getEmailRes) => {
+
+                        // Set assertion
+                        getEmailRes.body.should.have.a.lengthOf(1);
+                        (getEmailRes.body[0]._id).should.match(email2._id.toString());
+
+                        done(gerEmailErr);
+
+                    });
+            });
+
+        });
+
+
+    });
+
+
     afterEach((done) => {
         Email.remove()
             .exec(() => Template.remove().exec(done));
