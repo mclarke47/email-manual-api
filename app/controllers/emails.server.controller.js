@@ -13,19 +13,63 @@ const Email = mongoose.model('Email');
 
 exports.list = (req, res) => {
 
+    /**
+     * The "pagination" filter
+     */
     const page = (Number(req.query.p) > 0 ? Number(req.query.p) : 1) - 1;
     const perPage = (Number(req.query.pp) > 0 ? Number(req.query.pp) : 10);
 
     const options = {};
 
+    /**
+     * The "template" filter
+     */
     if (req.query.t) {
         options.template = req.query.t;
     }
 
+    /**
+     * The "dirty" filter
+     */
     if (req.query.dirty === '' || req.query.dirty === 'true') {
         options.dirty = true;
     } else if (req.query.dirty === 'false') {
         options.dirty = false;
+    }
+
+    /**
+     * The "sent" filter
+     */
+    if (req.query.sent === '' || req.query.sent === 'true') {
+        options.sent = true;
+    } else if (req.query.sent === 'false') {
+        options.sent = false;
+    }
+
+    /**
+     * The "toSubEdit" filter
+     */
+    if (req.query.toSubEdit === '' || req.query.toSubEdit === 'true') {
+        options.toSubEdit = true;
+    } else if (req.query.toSubEdit === 'false') {
+        options.toSubEdit = false;
+    }
+
+    /**
+     * The "subEdited" filter
+     */
+    if (req.query.subEdited === '' || req.query.subEdited === 'true') {
+        options.subEdited = true;
+    } else if (req.query.subEdited === 'false') {
+        options.subEdited = false;
+    }
+
+    /**
+     * The "toSend" filter
+     */
+    if (req.query.toSend === '' || req.query.toSend === 'true') {
+        options.sent = false;
+        options.sendTime = { "$lte": Date.now() };
     }
 
     res.header('X-Page', page + 1);

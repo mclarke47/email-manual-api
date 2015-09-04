@@ -52,26 +52,26 @@ const emailSchema = new Schema({
     valid: {
         type: Boolean,
         default: false
-    }//,
-    //sent: {
-    //    type: Boolean,
-    //    default: true,
-    //    index: true
-    //},
-    //toSubEdit: {
-    //    type: Boolean,
-    //    default: true,
-    //    index: true
-    //},
-    //subEdited: {
-    //    type: Boolean,
-    //    default: true,
-    //    index: true
-    //},
-    //sendTime: {
-    //    type: Date,
-    //    index: true
-    //}
+    },
+    sent: {
+        type: Boolean,
+        default: false,
+        index: true
+    },
+    toSubEdit: {
+        type: Boolean,
+        default: false,
+        index: true
+    },
+    subEdited: {
+        type: Boolean,
+        default: false,
+        index: true
+    },
+    sendTime: {
+        type: Date,
+        index: true
+    }
 });
 
 mongoose.model('Email', emailSchema);
