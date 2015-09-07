@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const extend = require('extend');
 const htmlToText = require('html-to-text');
+const fs = require('fs');
 
 const createJWT = require('../utils/createJWT.server.utils');
 
@@ -106,10 +107,24 @@ exports.read = (req, res) => {
 
     let token = createJWT(req.userEmail);
 
-    res.header('X-Auth', token);
+    let email = req.email.toObject();
 
-    res.json(req.email);
+    fs.readFile(email.template.path, {encoding: 'utf8'}, (err, fileContent) => {
 
+        /* istanbul ignore if - already tested in templates */
+        if (err) {
+            return res.status(400).send({
+                message: 'There is a problem reading the template source'
+            });
+        }
+
+        email.template.body = fileContent;
+
+        res.header('X-Auth', token);
+
+        res.json(email);
+
+    });
 };
 
 /** PATCH /emails/emailId **/
