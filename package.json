@@ -28,6 +28,7 @@
     "cors": "^2.7.1",
     "dotenv": "^1.2.0",
     "express": "^4.13.3",
+    "express-cache-response-directive": "^0.2.0",
     "extend": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-istanbul": "^0.10.0",
