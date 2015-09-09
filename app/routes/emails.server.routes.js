@@ -22,7 +22,7 @@ module.exports = (app) => {
      * @apiParam {Boolean} [sent=false] An email is sent if it has been sent
      * @apiParam {Boolean} [toSubEdit=false] An email is toSubEdit if it is ready to be subEdited
      * @apiParam {Boolean} [subEdited=false] An email is subEdited if it has already been subEdited
-     * @apiParam {Date} [sendTime] The time at which an email has to be sent
+     * @apiParam {Date} [sendTime] The time at which an email has to be sent. If set to "now", use current time.
 
      */
 
@@ -42,7 +42,7 @@ module.exports = (app) => {
      * @apiSuccess {Boolean} [sent=false] An email is sent if it has been sent
      * @apiSuccess {Boolean} [toSubEdit=false] An email is toSubEdit if it is ready to be subEdited
      * @apiSuccess {Boolean} [subEdited=false] An email is subEdited if it has already been subEdited
-     * @apiSuccess {Date} [sendTime] The time at which an email has to be sent
+     * @apiSuccess {Date} [sendTime] The time at which an email has to be sent.
      *
      *
      * @apiSuccessExample Success-Response:
@@ -131,7 +131,7 @@ module.exports = (app) => {
      * @apiSuccess {Boolean} [email.sent=false] An email is sent if it has been sent
      * @apiSuccess {Boolean} [email.toSubEdit=false] An email is toSubEdit if it is ready to be subEdited
      * @apiSuccess {Boolean} [email.subEdited=false] An email is subEdited if it has already been subEdited
-     * @apiSuccess {Date} [email.sendTime] The time at which an email has to be sent
+     * @apiSuccess {Date} [email.sendTime] The time at which an email has to be sent.
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
