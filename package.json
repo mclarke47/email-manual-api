@@ -4,9 +4,9 @@
   "description": "Manual Email API",
   "main": "server.js",
   "scripts": {
-    "test": "gulp --harmony test",
-    "start": "node --harmony server.js",
-    "postinstall": "gulp --harmony postinstall"
+    "test": "gulp test",
+    "start": "node server.js",
+    "postinstall": "gulp postinstall"
   },
   "repository": {
     "type": "git",
