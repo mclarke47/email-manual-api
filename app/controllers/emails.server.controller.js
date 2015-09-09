@@ -184,6 +184,13 @@ exports.patch = (req, res) => {
     let email = req.email;
     let requestBody = req.body;
 
+    if (email.sendTime && !allowedPatchWhenScheduled(requestBody)) {
+        // If the email has been scheduled, we can only patch the sendTime or sent property
+        return res.status(400).send({
+            message: 'The email is already scheduled, the required property cannot be edited'
+        });
+    }
+
     if (requestBody.body && requestBody.body.plain) {
         //Plain is a read-only property, it cannot be overridden by the client
         return res.status(400).send({
@@ -285,3 +292,14 @@ exports.emailById = (req, res, next, id) => {
         }
     });
 };
+
+
+function allowedPatchWhenScheduled (requestBody) {
+    // If the email has been scheduled, we only allow a PATCH with a single property.
+    // This property can either be 'sent' or 'sendTime'
+
+    let keys = Object.keys(requestBody);
+
+    return (keys.length === 1 && ['sentTime', 'sent'].indexOf(keys[0]) === 0);
+
+}

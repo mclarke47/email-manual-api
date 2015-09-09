@@ -21,6 +21,9 @@
     "title": "Email Manual APIs",
     "url": "http://email-webservices.ft.com"
   },
+  "engines" : {
+    "node" : "^4.0.0"
+  },
   "homepage": "https://github.com/Financial-Times/email-manual-api#readme",
   "dependencies": {
     "body-parser": "^1.13.3",
