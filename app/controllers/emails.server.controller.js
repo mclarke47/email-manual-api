@@ -110,6 +110,12 @@ exports.list = (req, res) => {
 
 exports.create = (req, res) => {
 
+
+    // If sendTime is 'now', we assign the current datetime to the property
+    if (req.body.sendTime && req.body.sendTime.toLocaleLowerCase() === 'now') {
+        req.body.sendTime = Date.now();
+    }
+
     let email = new Email(req.body);
 
     if (email.body && email.body.plain) {
@@ -183,6 +189,11 @@ exports.patch = (req, res) => {
 
     let email = req.email;
     let requestBody = req.body;
+
+    // If sendTime is 'now', we assign the current datetime to the property
+    if (requestBody.sendTime && requestBody.sendTime.toLocaleLowerCase() === 'now') {
+        requestBody.sendTime = Date.now();
+    }
 
     if (email.sendTime && !allowedPatchWhenScheduled(requestBody)) {
         // If the email has been scheduled, we can only patch the sendTime or sent property

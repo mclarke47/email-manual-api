@@ -95,6 +95,46 @@ describe('Email CRUD tests:', () => {
 
     });
 
+    it('should be able to save an email that has to be sent now', (done) => {
+
+        email = email.toObject();
+
+        email.sendTime = 'now';
+
+        agent
+            .post('/emails')
+            .set('Authorization', 'Bearer ' + token)
+            .send(email)
+            .expect(201)
+            .end((emailSaveErr, emailSaveRes) => {
+
+                if (emailSaveErr) {
+                    return done(emailSaveErr);
+                }
+
+                (emailSaveRes.headers['cache-control']).should.equal('no-cache, no-store');
+
+
+                Email.find({})
+                    .exec((emailFindErr, emailFindRes) => {
+
+                        // Handle emails get error
+                        if (emailFindErr) {
+                            return done(emailFindErr);
+                        }
+
+                        // Set assertions
+                        (emailFindRes[0].sendTime).should.be.an.instanceOf(Date);
+
+
+                        done();
+
+                    });
+
+            });
+
+    });
+
     it('should not be able to save an email if no name is provided', (done) => {
         // Invalidate template field
         email = email.toObject();
@@ -297,6 +337,37 @@ describe('Email CRUD tests:', () => {
                     (emailPatchRes.headers['cache-control']).should.equal('no-cache, no-store');
                     (emailPatchRes.body._id).should.equal(email._id.toString());
                     (emailPatchRes.body.dirty).should.equal(true);
+
+                    // Call the assertion callback
+                    done(emailPatchErr);
+                });
+
+        });
+    });
+
+    it('should be able to patch an email to be sent now', (done) => {
+
+        email.save(() => {
+
+            let patchEmail = { sendTime: 'now' };
+
+
+            agent
+                .patch('/emails/' + email._id)
+                .set('Authorization', 'Bearer ' + token)
+                .send(patchEmail)
+                .expect(200)
+                .end((emailPatchErr, emailPatchRes) => {
+
+                    if (emailPatchErr) {
+                        done(emailPatchErr);
+                    }
+
+                    // Set assertions
+                    (emailPatchRes.headers['cache-control']).should.equal('no-cache, no-store');
+                    (emailPatchRes.body._id).should.equal(email._id.toString());
+                    (new Date(emailPatchRes.body.sendTime)).should.be.an.instanceOf(Date);
+
 
                     // Call the assertion callback
                     done(emailPatchErr);
