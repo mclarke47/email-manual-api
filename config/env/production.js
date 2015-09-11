@@ -7,12 +7,4 @@ const db = process.env.MONGOLAB_URI;
 const googleSecret = process.env.GOOGLE_SECRET;
 const tokenSecret = process.env.TOKEN_SECRET;
 
-
-module.exports = {
-    port: port,
-    db: db,
-    processId: processId,
-    logLevel: logLevel,
-    googleSecret: googleSecret,
-    tokenSecret: tokenSecret
-};
+module.exports = { port, db, processId, logLevel, googleSecret, tokenSecret: tokenSecret };
