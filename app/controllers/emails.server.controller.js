@@ -195,6 +195,13 @@ exports.patch = (req, res) => {
         requestBody.sendTime = Date.now();
     }
 
+    if (email.sent) {
+        // If the email has been sent, it cannot be patched
+        return res.status(400).send({
+            message: 'Cannot patch. The email has already been sent'
+        });
+    }
+
     if (email.sendTime && !allowedPatchWhenScheduled(requestBody)) {
         // If the email has been scheduled, we can only patch the sendTime or sent property
         return res.status(400).send({
