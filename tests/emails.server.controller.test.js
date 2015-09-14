@@ -532,6 +532,35 @@ describe('Email CRUD tests:', () => {
         });
     });
 
+
+    it('should not be able to patch the content of an email if it has been already scheduled', (done) => {
+
+        email.sendTime = Date.now();
+        email.sent = true;
+
+        email.save(() => {
+
+            let patchEmail = { subject: 'Some subject' };
+
+            agent
+                .patch('/emails/' + email._id)
+                .set('Authorization', 'Bearer ' + token)
+                .send(patchEmail)
+                .expect(400)
+                .end((emailPatchErr, emailPatchRes) => {
+
+                    // Set message assertion
+                    should.exist(emailPatchRes);
+                    (emailPatchRes.body.message).should.equal('Cannot patch. The email has already been sent');
+
+                    // Handle list save error
+                    done(emailPatchErr);
+
+                });
+
+        });
+    });
+
     /** DELETE /emails/:emailId **/
 
     it('should be able to delete a email', (done) => {
