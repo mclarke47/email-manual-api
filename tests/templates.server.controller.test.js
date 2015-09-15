@@ -39,6 +39,7 @@ describe('Template CRUD tests:', () => {
                 address: 'email@email.ft.com',
                 name: "Financial Times"
             },
+            list: 'abcdefg',
             fields: [field]
         });
 
