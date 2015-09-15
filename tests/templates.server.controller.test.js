@@ -35,6 +35,10 @@ describe('Template CRUD tests:', () => {
         template = new Template({
             name: 'Editorial',
             path: './templates/example.html',
+            from: {
+                address: 'email@email.ft.com',
+                name: "Financial Times"
+            },
             fields: [field]
         });
 
