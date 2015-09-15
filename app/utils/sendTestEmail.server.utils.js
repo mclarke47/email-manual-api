@@ -1,5 +1,8 @@
 'use strict';
 
+const mongoose = require('mongoose');
+const Email = mongoose.model('Email');
+
 
 module.exports = (req, res) => {
 
@@ -49,6 +52,8 @@ module.exports = (req, res) => {
                 let htmlText = email.body.html;
                 let subject = email.subject;
                 let from = email.template.from;
+
+                return res.json({ plainText, htmlText, subject, from});
 
             }
         });

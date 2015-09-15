@@ -27,9 +27,13 @@ describe('Template Model Unit Tests:', function() {
         };
 
         template = new Template({
-           name: 'Editorial',
-           path: './templates/example.html',
-           fields: [field]
+            name: 'Editorial',
+            path: './templates/example.html',
+            from: {
+                address: 'email@email.ft.com',
+                name: "Financial Times"
+            },
+            fields: [field]
         });
 
         template.save(() => {

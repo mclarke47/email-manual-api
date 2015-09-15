@@ -38,6 +38,10 @@ describe('Email CRUD tests:', () => {
         template = new Template({
             name: 'Editorial',
             path: './templates/example.html',
+            from: {
+                address: 'email@email.ft.com',
+                name: "Financial Times"
+            },
             fields: [field]
         });
 
@@ -755,6 +759,10 @@ describe('Email CRUD tests:', () => {
         let template2 = new Template({
             name: 'Breaking news',
             path: './templates/example.html',
+            from: {
+                address: 'email@email.ft.com',
+                name: "Financial Times"
+            },
             fields: [field]
         });
 
