@@ -33,6 +33,11 @@ const templateSchema = new Schema({
             required: 'from_name cannot be blank'
         }
     },
+    list: {
+        type: String,
+        trim: true,
+        required: 'list cannot be blank'
+    },
     fields: [{
         label: {
             type: String,

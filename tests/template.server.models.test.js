@@ -31,6 +31,7 @@ describe('Template Model Unit Tests:', function() {
                 address: 'email@email.ft.com',
                 name: "Financial Times"
             },
+            list: 'abcdefg',
             fields: [field]
         });
 
