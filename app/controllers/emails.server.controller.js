@@ -294,6 +294,6 @@ function allowedPatchWhenScheduled (requestBody) {
 
     let keys = Object.keys(requestBody);
 
-    return (keys.length === 1 && ['sendTime', 'sent'].indexOf(keys[0]) === 0);
+    return (keys.length === 1 && ['sendTime', 'sent'].indexOf(keys[0]) > -1);
 
 }
