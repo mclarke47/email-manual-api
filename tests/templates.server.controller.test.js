@@ -160,6 +160,67 @@ describe('Template CRUD tests:', () => {
         });
     });
 
+    it('should be able to get a list of templates using basic auth', (done) => {
+
+        let auth = "Basic " + new Buffer(config.authUser + ":" + config.authPassword).toString("base64");
+
+        template.save(() => {
+
+            agent
+                .get('/templates')
+                .set('Authorization', auth)
+                .end((templatesGetErr, templatesGetRes) => {
+
+                    // Set assertion
+                    templatesGetRes.body.should.have.a.lengthOf(1);
+
+                    done(templatesGetErr);
+                });
+
+        });
+    });
+
+    it('should receive an error when the wrong credentials are sent', (done) => {
+
+        let auth = "Basic " + new Buffer(config.authUser + ":" + config.authPassword+'x').toString("base64");
+
+        template.save(() => {
+
+            agent
+                .get('/templates')
+                .set('Authorization', auth)
+                .end((templatesGetErr, templatesGetRes) => {
+
+                    // Set assertion
+                    (templatesGetRes.body.message).should.equal('Invalid username or password');
+
+                    done(templatesGetErr);
+                });
+
+        });
+    });
+
+    it('should not be able to get a list of templates using an unsupported authentication method', (done) => {
+
+        let auth = "Some method";
+
+        template.save(() => {
+
+            agent
+                .get('/templates')
+                .set('Authorization', auth)
+                .expect(401)
+                .end((templatesGetErr, templatesGetRes) => {
+
+                    // Set assertion
+                    (templatesGetRes.body.message).should.equal('Authentication method not supported');
+
+                    done(templatesGetErr);
+                });
+
+        });
+    });
+
 
     it('should not be able to get a list of templates if no auth token is provided', (done) => {
 

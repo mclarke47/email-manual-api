@@ -5,8 +5,6 @@ const extend = require('extend');
 const htmlToText = require('html-to-text');
 const fs = require('fs');
 
-const createJWT = require('../utils/createJWT.server.utils');
-
 const Email = mongoose.model('Email');
 
 
@@ -94,10 +92,6 @@ exports.list = (req, res) => {
                     });
                 }
                 else {
-                    let token = createJWT(req.userEmail);
-                    res.header('X-Auth', token);
-                    res.cacheControl({ noStore: true });
-
                     res.json(emails);
                 }
             });
@@ -145,10 +139,6 @@ exports.create = (req, res) => {
             });
         }
         else {
-            let token = createJWT(req.userEmail);
-            res.header('X-Auth', token);
-            res.cacheControl({ noStore: true });
-
             res.status(201).json(email);
         }
     });
@@ -159,10 +149,7 @@ exports.create = (req, res) => {
 
 exports.read = (req, res) => {
 
-    let token = createJWT(req.userEmail);
-
     let email = req.email.toObject();
-
 
     fs.readFile(email.template.path, {encoding: 'utf8'}, (err, fileContent) => {
 
@@ -174,9 +161,6 @@ exports.read = (req, res) => {
         }
 
         email.template.body = fileContent;
-        
-        res.header('X-Auth', token);
-        res.cacheControl({ noStore: true });
 
         res.json(email);
 
@@ -246,10 +230,6 @@ exports.patch = (req, res) => {
             });
         }
         else {
-            let token = createJWT(req.userEmail);
-            res.header('X-Auth', token);
-            res.cacheControl({ noStore: true });
-
             res.json(email);
         }
     });
@@ -268,10 +248,6 @@ exports.delete = function(req, res) {
             });
         }
         else {
-            let token = createJWT(req.userEmail);
-            res.header('X-Auth', token);
-            res.cacheControl({ noStore: true });
-
             res.json(email);
         }
     });
