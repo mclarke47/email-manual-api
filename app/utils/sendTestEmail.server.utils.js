@@ -6,8 +6,8 @@ const Email = mongoose.model('Email');
 
 module.exports = (req, res) => {
 
-    let emailId = req.email;
-    let recipients = req.recipients;
+    let emailId = req.body.email;
+    let recipients = req.body.recipients;
 
     if (!emailId) {
         //Return an error if the email ID is missing
