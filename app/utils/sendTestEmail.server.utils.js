@@ -53,7 +53,9 @@ module.exports = (req, res) => {
                 let subject = email.subject;
                 let from = email.template.from;
 
-                return res.json({ plainText, htmlText, subject, from});
+                setTimeout(() => {
+                    res.json({ plainText, htmlText, subject, from });
+                }, 2000);
 
             }
         });
