@@ -1,7 +1,7 @@
 'use strict';
 
 const templates = require('../controllers/templates.server.controller');
-const ensureAuthenticated = require('../utils/ensureAuthenticated.server.utils');
+const ensureAuthenticated = require('../middlewares/ensureAuthenticated.server.utils');
 
 module.exports = (app) => {
 
