@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const Email = mongoose.model('Email');
+const sendClient = require('../services/sendClient.server.services');
 
 
 module.exports = (req, res) => {
@@ -48,14 +49,18 @@ module.exports = (req, res) => {
 
             else {
                 //We have successfully retrieved an email
-                let plainText = email.body.plain;
-                let htmlText = email.body.html;
+                let body = email.body;
                 let subject = email.subject;
                 let from = email.template.from;
 
-                setTimeout(() => {
-                    res.json({ plainText, htmlText, subject, from });
-                }, 2000);
+
+                Promise.all(recipients.map((to) => sendClient.sendToAddress(from, to, subject, body)))
+                    .then(() => res.json({'messages_delivered': recipients.length }))
+                    .catch((err) => {
+                        return res.status(400).send({
+                            message: err.message
+                        });
+                    });
 
             }
         });
