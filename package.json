@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "gulp-apidoc": "^0.1.5",
+    "nock": "^2.12.0",
     "should": "^7.1.0",
     "supertest": "^1.1.0"
   }
