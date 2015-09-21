@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const Email = mongoose.model('Email');
-const sendClient = require('../services/sendClient.server.services');
+const sendClient = require('../services/sendClient.server.services.js');
 
 
 module.exports = (req, res) => {
@@ -54,7 +54,7 @@ module.exports = (req, res) => {
                 let from = email.template.from;
 
 
-                Promise.all(recipients.map((to) => sendClient.sendToAddress(from, to, subject, body)))
+                Promise.all(recipients.map((to) => sendClient.sendByAddress(from, to, subject, body)))
                     .then(() => res.json({'messages_delivered': recipients.length }))
                     .catch((err) => {
                         return res.status(400).send({
