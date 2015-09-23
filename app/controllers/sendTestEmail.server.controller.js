@@ -53,7 +53,6 @@ module.exports = (req, res) => {
                 let subject = email.subject;
                 let from = email.template.from;
 
-
                 Promise.all(recipients.map((to) => sendClient.sendByAddress(from, to, subject, body)))
                     .then(() => res.json({'messages_delivered': recipients.length }))
                     .catch((err) => {
