@@ -14,7 +14,8 @@ exports.sendByAddress = (emailId, from, to, subject, body) => {
         transmissionHeader: {
             returnPath: from.address,
             metadata: {
-                emailId: emailId
+                emailId: emailId,
+                test: true
             }
         },
         from: from,
