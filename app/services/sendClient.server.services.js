@@ -8,11 +8,14 @@ const fetch = require('node-fetch');
 const config = require('../../config/config');
 const logger = require('../../config/logger');
 
-exports.sendByAddress = (from, to, subject, body) => {
+exports.sendByAddress = (emailId, from, to, subject, body) => {
 
     let payload = {
         transmissionHeader: {
-            returnPath: from.address
+            returnPath: from.address,
+            metadata: {
+                emailId: emailId
+            }
         },
         from: from,
         to: {

@@ -42,6 +42,8 @@ describe('The sendClient service', () => {
                 .post('/send-by-address')
                 .reply(200, responseBodies.successPost);
 
+            let emailId = '1234567890';
+
             let from = {
                 address: 'FT@ft.com',
                 "name": 'FT Breaking News'
@@ -55,7 +57,7 @@ describe('The sendClient service', () => {
                 html: '<p>This is the body</p>'
             };
 
-            let result = sendClient.sendByAddress(from, to, subject, body);
+            let result = sendClient.sendByAddress(emailId, from, to, subject, body);
 
             result.then((json) => {
                 json.should.have.a.property('results');
