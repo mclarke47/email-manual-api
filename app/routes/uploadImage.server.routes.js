@@ -4,7 +4,7 @@ const ensureAuthenticated = require('../middlewares/ensureAuthenticated.server.u
 const uploadImage = require('../controllers/uploadImage.server.controller');
 
 module.exports = (app) => {
-    app.route('/send-test-email')
+    app.route('/upload-image')
         .post(ensureAuthenticated, uploadImage);
 
 };
