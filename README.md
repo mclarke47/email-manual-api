@@ -3,5 +3,4 @@
 
 Manual Email API
 
-
 Docs: https://email-webservices.ft.com/docs/manual-api/  
