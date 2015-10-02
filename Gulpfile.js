@@ -59,11 +59,11 @@ gulp.task('istanbul', () => {
 
 gulp.task('test', ['setTestEnv', 'lint', 'istanbul']);
 
-gulp.task('apidoc', function(){
-    apidoc.exec({
+gulp.task('apidoc', function(done){
+    apidoc({
         src: "app/",
         dest: "public/docs/manual-api/"
-    });
+    }, done);
 });
 
 gulp.task('postinstall', ['apidoc']);
