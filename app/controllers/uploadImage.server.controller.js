@@ -1,5 +1,9 @@
 'use strict';
 
+const AWS = require('aws-sdk');
+
+var s3 = new AWS.S3();
+
 module.exports = (req, res) => {
 
     return res.status(201).json({
