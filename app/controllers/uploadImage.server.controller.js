@@ -6,13 +6,11 @@ var s3 = new AWS.S3();
 
 module.exports = (req, res) => {
 
-    let files = req.files;
-
-    console.log(files);
+    let file = req.file;
 
     return res.status(201).json({
         url: 'http://4.bp.blogspot.com/-XkviAtJ1s6Q/T3YFb2RUhDI/AAAAAAAAAVQ/EHomLZlFMKo/s1600/small+cat.jpg',
-        files: files
+        files: file
     });
 
 };
