@@ -33,7 +33,7 @@ exports.upload = (req, res) => {
             ACL: 'public-read',
             Body: fs.createReadStream(file.path),
             Key: destFileName.toString(),
-            ContentType: 'application/octet-stream' // force download if it's accessed as a top location
+            ContentType: file.mimetype
         })
         .send(callback);
     }
