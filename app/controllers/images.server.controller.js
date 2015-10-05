@@ -26,7 +26,7 @@ exports.upload = (req, res) => {
             res.status(500).json({ message: 'failed to upload to s3' });
         }
 
-        fs.unlink(file, () => res.status(201).json({ url: data.Location }));
+        fs.unlink(file.path, () => res.status(201).json({ url: data.Location }));
 
     });
 
