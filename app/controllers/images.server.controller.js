@@ -23,9 +23,11 @@ exports.upload = (req, res) => {
 
     uploadToS3(file, id, (err, data) => {
         if (err) {
-            return res.status(500).json({ message: 'failed to upload to s3' });
+            res.status(500).json({ message: 'failed to upload to s3' });
         }
-        return res.status(201).json({ url: data.Location });
+
+        fs.unlink(file, () => res.status(201).json({ url: data.Location }));
+
     });
 
     function uploadToS3(file, destFileName, callback) {
