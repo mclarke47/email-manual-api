@@ -60,7 +60,7 @@ exports.list = (req, res) => {
             .map((image) => {
                 return {
                    url: `https://${config.awsBucket}.s3.amazonaws.com/${image.Key}`
-                }
+                };
 
             });
 
