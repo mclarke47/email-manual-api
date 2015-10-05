@@ -42,6 +42,8 @@ module.exports = () => {
     require('../app/routes/emails.server.routes.js')(app);
     require('../app/routes/templates.server.routes.js')(app);
     require('../app/routes/sendTestEmail.server.routes')(app);
+    require('../app/routes/images.server.routes.js')(app);
+
 
 
     return app;
