@@ -10,8 +10,14 @@ const authUser = process.env.BASIC_AUTH_USER || 'test';
 const authPassword = process.env.BASIC_AUTH_PASSWORD || 'test';
 const simpleEmailEndpoint = process.env.SIMPLE_EMAIL_ENDPOINT || 'https://localhost:1338';
 const simpleEmailKey = process.env.SIMPLE_EMAIL_KEY || 'test';
+const awsAccessKeyId = process.env.AWS_ACCESS_KEY || 'test';
+const awsSecretAccessKey = process.env.AWS_SECRET_KEY || 'test';
+const awsBucket = process.env.AWS_BUCKET || 'test';
 
 module.exports = {
+    awsAccessKeyId,
+    awsBucket,
+    awsSecretAccessKey,
     port,
     db,
     processId,
