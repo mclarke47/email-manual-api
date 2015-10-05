@@ -3,6 +3,7 @@
 const fs = require('fs');
 const s3 = require('../../config/s3');
 const uuid = require('node-uuid');
+const config = require('../../config/config');
 
 
 /* istanbul ignore next */ //TODO
@@ -49,7 +50,19 @@ exports.list = (req, res) => {
             return res.status(500).json({ message: 'failed to retrieve from s3' });
         }
 
-        return res.json(data.Contents);
+        let images = data.Contents
+            .filter((image) => {
+                let yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
+                return (new Date(image.LastModified > yesterday));
+            })
+            .map((image) => {
+                return {
+                   url: `https://${config.awsBucket}.s3.amazonaws.com/${image.Key}`
+                }
+
+            });
+
+        return res.json(images);
     });
 
 
