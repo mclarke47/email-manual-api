@@ -18,9 +18,9 @@ exports.upload = (req, res) => {
         return res.status(403).json({ message: 'expect image file' } );
     }
 
-    let uuid = uuid.v4();
+    let id = uuid.v4();
 
-    uploadToS3(file, uuid, (err, data) => {
+    uploadToS3(file, id, (err, data) => {
         if (err) {
             return res.status(500).json({ message: 'failed to upload to s3' });
         }
