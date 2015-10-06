@@ -14,6 +14,15 @@
     "SENTRY_DSN":{
       "required":true
     },
+    "AWS_ACCESS_KEY": {
+      "required":true
+    },
+    "AWS_SECRET_KEY": {
+      "required":true
+    },
+    "AWS_BUCKET": {
+      "required":true
+    },
     "TOKEN_SECRET":{
       "generator":"secret"
     }
