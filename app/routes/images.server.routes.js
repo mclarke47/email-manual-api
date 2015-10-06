@@ -8,7 +8,7 @@ const upload = multer({ dest: 'uploads/' });
 
 module.exports = (app) => {
     app.route('/images')
-        .post(/*ensureAuthenticated, */upload.single('image'), images.upload)
-        .get(/*ensureAuthenticated, */images.list);
+        .post(ensureAuthenticated, upload.single('image'), images.upload)
+        .get(ensureAuthenticated, images.list);
 
 };
