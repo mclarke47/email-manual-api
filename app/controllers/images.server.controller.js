@@ -57,6 +57,9 @@ exports.list = (req, res) => {
                 let yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
                 return (new Date(image.LastModified) > yesterday);
             })
+            .sort((image1, image2) => {
+                return (new Date(image2.LastModified) - new Date(image1.LastModified));
+            })
             .map((image) => {
                 return {
                    url: `https://${config.awsBucket}.s3.amazonaws.com/${image.Key}`
