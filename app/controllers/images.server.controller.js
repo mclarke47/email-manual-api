@@ -55,7 +55,7 @@ exports.list = (req, res) => {
         let images = data.Contents
             .filter((image) => {
                 let yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
-                return (new Date(image.LastModified > yesterday));
+                return (new Date(image.LastModified) > yesterday);
             })
             .map((image) => {
                 return {
