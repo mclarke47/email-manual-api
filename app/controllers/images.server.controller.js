@@ -54,8 +54,8 @@ exports.list = (req, res) => {
 
         let images = data.Contents
             .filter((image) => {
-                let yesterday = new Date(new Date().getTime() - (24 * 60 * 60 * 1000));
-                return (new Date(image.LastModified) > yesterday);
+                let oneWeekAgo = new Date(new Date().getTime() - (24 * 60 * 60 * 1000 * 7));
+                return (new Date(image.LastModified) > oneWeekAgo);
             })
             .sort((image1, image2) => {
                 return (new Date(image2.LastModified) - new Date(image1.LastModified));
