@@ -53,7 +53,7 @@ const templateSchema = new Schema({
         type: {
             type: String,
             trim: true,
-            enum: ['textbox', 'wysiwyg', 'footerWidget', 'authorWidget'],
+            enum: ['textbox', 'wysiwyg', 'footerWidget', 'authorWidget', 'newsFeed'],
             required: 'field_type cannot be blank'
         }
     }]
