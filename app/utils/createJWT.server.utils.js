@@ -8,7 +8,7 @@ const config = require('../../config/config');
 module.exports = (email) => {
     let payload = {
         email: email,
-        expire: moment().add(2, 'hours').unix()
+        expire: moment().add(7, 'days').unix()
     };
     return jwt.encode(payload, config.tokenSecret);
 };
