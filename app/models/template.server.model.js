@@ -21,6 +21,10 @@ const templateSchema = new Schema({
         type: String,
         trim: true
     },
+    campaignParam: {
+        type: String,
+        trim: true
+    },
     from: {
         address: {
             type: String,
