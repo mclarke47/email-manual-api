@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const Email = mongoose.model('Email');
 const sendClient = require('../services/sendClient.server.services.js');
+const logger = require('../../config/logger');
 
 
 module.exports = (req, res) => {
@@ -56,6 +57,7 @@ module.exports = (req, res) => {
                 Promise.all(recipients.map((to) => sendClient.sendByAddress(emailId, from, to, subject, body)))
                     .then(() => res.json({'messages_delivered': recipients.length }))
                     .catch((err) => {
+                        logger.warn(err);
                         return res.status(400).send({
                             message: err.message
                         });
