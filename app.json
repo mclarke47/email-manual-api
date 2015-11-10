@@ -28,7 +28,7 @@
     }
   },
   "addons":[
-    "mongolab",
+    "mongohq",
     "papertrail"
   ]
 }
