@@ -9,6 +9,7 @@ module.exports = function() {
 
     require('../app/models/template.server.model');
     require('../app/models/email.server.model');
+    require('../app/models/user.server.model');
 
     return db;
 };
