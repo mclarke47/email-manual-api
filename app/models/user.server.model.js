@@ -13,7 +13,19 @@ const userSchema = new Schema({
         trim: true
     },
     permissions: {
-        canDisplayUsers: {
+        canCreateUsers: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canReadUsers: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canUpdateUsers: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canDeleteUsers: {
             type: Schema.Types.Mixed,
             default: false
         }
