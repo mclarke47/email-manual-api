@@ -13,7 +13,10 @@ const userSchema = new Schema({
         trim: true
     },
     permissions: {
-        canDisplayUsers: Schema.Types.Mixed
+        canDisplayUsers: {
+            type: Schema.Types.Mixed,
+            default: false
+        }
     }
 });
 
