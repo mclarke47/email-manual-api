@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     email: {
         required: 'email cannot be blank',
-        index: true,
+        index: { unique: true },
         type: String,
         trim: true
     },
