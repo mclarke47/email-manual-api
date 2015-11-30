@@ -28,6 +28,22 @@ const userSchema = new Schema({
         canDeleteUsers: {
             type: Schema.Types.Mixed,
             default: false
+        },
+        canCreateEmails: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canReadEmails: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canUpdateEmails: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canDeleteEmails: {
+            type: Schema.Types.Mixed,
+            default: false
         }
     }
 });
