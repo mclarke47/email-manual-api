@@ -10,39 +10,23 @@ const User = mongoose.model('User');
 
 exports.list = (req, res) => {
 
-    /**
-     * The "pagination" filter
-     */
-    const page = (Number(req.query.p) > 0 ? Number(req.query.p) : 1) - 1;
-    const perPage = (Number(req.query.pp) > 0 ? Number(req.query.pp) : 10);
+
 
     const options = {};
 
-
-    res.header('X-Page', page + 1);
-    res.header('X-Per-Page', perPage);
-
-    User.count(options, (countErr, count) => {
-
-        res.header('X-Total-Count', count);
-
-
-        User.find(options,  { __v: 0, permissions: 0 })
-            .sort({ email: -1 })
-            .limit(perPage)
-            .skip(perPage * page)
-            .exec((findErr, users) => {
-                /* istanbul ignore if */
-                if (findErr) {
-                    return res.status(400).send({
-                        message: findErr.message
-                    });
-                }
-                else {
-                    res.json(users);
-                }
-            });
-    });
+    User.find(options,  { __v: 0, permissions: 0 })
+        .sort({ email: -1 })
+        .exec((findErr, users) => {
+            /* istanbul ignore if */
+            if (findErr) {
+                return res.status(400).send({
+                    message: findErr.message
+                });
+            }
+            else {
+                res.json(users);
+            }
+        });
 };
 
 
