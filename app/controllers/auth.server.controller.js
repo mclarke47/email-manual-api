@@ -64,7 +64,7 @@ exports.authenticate = (req, res) => {
                 if (user) {
 
                     let token = createJWT(userEmail);
-                    res.send({ token: token, profile: profile, user: user });
+                    return res.send({ token: token, profile: profile, user: user });
 
                 } else {
                     return res.status(401).send({
