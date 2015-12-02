@@ -64,7 +64,7 @@ describe('The /auth endpoint', () => {
         after((done) => {
             request.post.restore();
             request.get.restore();
-            done();
+            User.remove().exec(done);
         });
 
     });
