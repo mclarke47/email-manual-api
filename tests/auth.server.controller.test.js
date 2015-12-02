@@ -8,6 +8,8 @@ const should = require('should');
 const sinon      = require('sinon');
 const request    = require('request');
 const supertest = require('supertest');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 
 const agent = supertest.agent(app);
 
@@ -15,6 +17,9 @@ describe('The /auth endpoint', () => {
 
     describe('when a valid profile authenticates', () => {
         before((done) => {
+
+            let user = new User({ email: 'abc@ft.com'});
+
             sinon
                 .stub(request, 'post')
                 .yields(null, null, {access_token: 'token'});
@@ -32,7 +37,8 @@ describe('The /auth endpoint', () => {
                     picture: "https://someUrl",
                     sub: "35325235235325"
                 });
-            done();
+
+            user.save(done);
         });
 
         it('should return a token when a valid profile authenticates', (done) => {
@@ -123,7 +129,7 @@ describe('The /auth endpoint', () => {
             done();
         });
 
-        it('should return a token when a valid profile authenticates', (done) => {
+        it('should return a 401 when an invalid profile authenticates', (done) => {
 
             let postBody = {
                 code: 'someCode',
@@ -174,7 +180,7 @@ describe('The /auth endpoint', () => {
             done();
         });
 
-        it('should return a token when a valid profile authenticates', (done) => {
+        it('should return a 401 when an invalid profile authenticates', (done) => {
 
             let postBody = {
                 code: 'someCode',
