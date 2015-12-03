@@ -64,19 +64,19 @@ exports.read = (req, res) => {
 
 exports.patch = (req, res) => {
 
-    let user = req.user;
+    let userObject = req.user.toObject();
     let requestBody = req.body;
 
-    user = _.merge(user, requestBody);
+    _.merge(userObject, requestBody);
 
-    user.save((saveErr) => {
-        if (saveErr) {
+    User.update({ _id: userObject._id }, userObject, (updateErr) => {
+        if (updateErr) {
             return res.status(400).send({
-                message: saveErr.message
+                message: updateErr.message
             });
         }
         else {
-            res.json(user);
+            res.json(userObject);
         }
     });
 };
