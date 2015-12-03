@@ -1,6 +1,8 @@
 'use strict';
 
 const request = require('request');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 
 const config = require('../../config/config');
 const createJWT = require('../utils/createJWT.server.utils');
@@ -58,13 +60,18 @@ exports.authenticate = (req, res) => {
 
             let userEmail = profile.email;
 
-            if (!userEmail.endsWith('@'+ domain)) {
-                return res.status(401).send({message: 'Unauthorized'});
-            }
+            User.findOne({ email: userEmail}).exec((err, user) => {
+                if (user) {
 
-            let token = createJWT(userEmail);
-            res.send({ token: token, profile: profile });
+                    let token = createJWT(userEmail);
+                    return res.send({ token: token, profile: profile, user: user });
 
+                } else {
+                    return res.status(401).send({
+                        message: 'Unauthorized'
+                    });
+                }
+            });
 
         });
 
