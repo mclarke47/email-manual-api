@@ -297,7 +297,7 @@ describe('User CRUD tests:', () => {
 
                     // Set message assertion
                     should.exist(userPatchRes);
-                    (userPatchRes.body.message).should.equal('User validation failed');
+                    (userPatchRes.body.message).should.equal('Validation failed');
 
                     // Handle list save error
                     done(userPatchErr);
