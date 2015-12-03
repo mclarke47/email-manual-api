@@ -83,7 +83,7 @@ exports.patch = (req, res) => {
 
     let template = req.template;
 
-    template = extend(template, req.body);
+    template = extend(true, template, req.body);
 
     fs.readFile(template.path, {encoding: 'utf8'}, (err) => {
 

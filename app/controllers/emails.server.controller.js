@@ -218,7 +218,7 @@ exports.patch = (req, res) => {
         requestBody.dirty = true;
     }
 
-    email = extend(email, requestBody);
+    email = extend(true, email, requestBody);
 
 
     email.updatedOn = Date.now();
