@@ -69,7 +69,7 @@ exports.patch = (req, res) => {
 
     _.merge(userObject, requestBody);
 
-    User.update({ _id: userObject._id }, userObject, (updateErr) => {
+    User.update({ _id: userObject._id }, userObject, { runValidators: true }, (updateErr) => {
         if (updateErr) {
             return res.status(400).send({
                 message: updateErr.message
