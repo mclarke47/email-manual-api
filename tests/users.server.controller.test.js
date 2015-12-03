@@ -41,7 +41,7 @@ describe('User CRUD tests:', () => {
 
     it('should be able to save a user', (done) => {
         agent
-            .post('/users')
+            .post('/eme-users')
             .set('Authorization', 'Bearer ' + token)
             .send(user)
             .expect(201)
@@ -75,7 +75,7 @@ describe('User CRUD tests:', () => {
         // Invalidate email field
         user.email = '';
 
-        agent.post('/users')
+        agent.post('/eme-users')
             .set('Authorization', 'Bearer ' + token)
             .send(user)
             .expect(400)
@@ -93,7 +93,7 @@ describe('User CRUD tests:', () => {
 
     it('should not be able to save a user if no auth token is provided', (done) => {
 
-        agent.post('/users')
+        agent.post('/eme-users')
             .send(user)
             .expect(401)
             .end((userSaveErr, userSaveRes) => {
@@ -113,7 +113,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .get('/users')
+                .get('/eme-users')
                 .set('Authorization', 'Bearer ' + token)
                 .end((usersGetErr, usersGetRes) => {
 
@@ -134,7 +134,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .get('/users')
+                .get('/eme-users')
                 .set('Authorization', auth)
                 .end((usersGetErr, usersGetRes) => {
 
@@ -154,7 +154,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .get('/users')
+                .get('/eme-users')
                 .set('Authorization', auth)
                 .end((usersGetErr, usersGetRes) => {
 
@@ -174,7 +174,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .get('/users')
+                .get('/eme-users')
                 .set('Authorization', auth)
                 .expect(401)
                 .end((usersGetErr, usersGetRes) => {
@@ -194,7 +194,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .get('/users')
+                .get('/eme-users')
                 .expect(401)
                 .end((usersGetErr, usersGetRes) => {
 
@@ -216,7 +216,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .get('/users/' + user._id)
+                .get('/eme-users/' + user._id)
                 .set('Authorization', 'Bearer ' + token)
                 .end((userGetErr, userGetRes) => {
 
@@ -235,7 +235,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .get('/users/' + user._id)
+                .get('/eme-users/' + user._id)
                 .expect(401)
                 .end((userGetErr, userGetRes) => {
 
@@ -261,7 +261,7 @@ describe('User CRUD tests:', () => {
             
 
             agent
-                .patch('/users/' + user._id)
+                .patch('/eme-users/' + user._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchUser)
                 .expect(200)
@@ -289,7 +289,7 @@ describe('User CRUD tests:', () => {
             let patchUser = { email: '' };
 
             agent
-                .patch('/users/' + user._id)
+                .patch('/eme-users/' + user._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchUser)
                 .expect(400)
@@ -312,7 +312,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .patch('/users/' + user._id)
+                .patch('/eme-users/' + user._id)
                 .expect(401)
                 .end((userPatchErr, userPatchRes) => {
 
@@ -335,7 +335,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .delete('/users/' + user._id)
+                .delete('/eme-users/' + user._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(user)
                 .expect(200)
@@ -371,7 +371,7 @@ describe('User CRUD tests:', () => {
         user.save(() => {
 
             agent
-                .delete('/users/' + user._id)
+                .delete('/eme-users/' + user._id)
                 .expect(401)
                 .end((userDeleteErr, userDeleteRes) => {
 
@@ -391,7 +391,7 @@ describe('User CRUD tests:', () => {
     it('returns an error if a wrongly formatted _id is provided when retrieving a user', (done) => {
         user.save(() => {
             agent
-                .get('/users/' + 'invalidId')
+                .get('/eme-users/' + 'invalidId')
                 .set('Authorization', 'Bearer ' + token)
                 .expect(400)
                 .end((userGetErr, userGetRes) => {
@@ -413,7 +413,7 @@ describe('User CRUD tests:', () => {
 
         user.save(() => {
             agent
-                .get('/users/' + randomId)
+                .get('/eme-users/' + randomId)
                 .set('Authorization', 'Bearer ' + token)
                 .expect(404)
                 .end((userGetErr, userGetRes) => {
@@ -435,7 +435,7 @@ describe('User CRUD tests:', () => {
 
         user.save(() => {
             agent
-                .get('/users/')
+                .get('/eme-users')
                 .set('Authorization', 'Bearer ' + randomJWT)
                 .expect(401)
                 .end((userGetErr, userGetRes) => {
@@ -462,7 +462,7 @@ describe('User CRUD tests:', () => {
 
         user.save(() => {
             agent
-                .get('/users/')
+                .get('/eme-users')
                 .set('Authorization', 'Bearer ' + expiredJWT)
                 .expect(401)
                 .end((userGetErr, userGetRes) => {
