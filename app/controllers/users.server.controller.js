@@ -67,7 +67,7 @@ exports.patch = (req, res) => {
     let user = req.user;
     let requestBody = req.body;
 
-    user = extend(user, requestBody);
+    user = extend(true, user, requestBody);
 
     user.save((saveErr) => {
         if (saveErr) {
