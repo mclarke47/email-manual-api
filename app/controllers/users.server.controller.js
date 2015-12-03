@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const extend = require('extend');
+const _ = require('lodash');
 
 const User = mongoose.model('User');
 
@@ -67,7 +67,7 @@ exports.patch = (req, res) => {
     let user = req.user;
     let requestBody = req.body;
 
-    user = extend(true, user, requestBody);
+    user = _.merge(user, requestBody);
 
     user.save((saveErr) => {
         if (saveErr) {
