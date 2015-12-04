@@ -10,7 +10,8 @@ const userSchema = new Schema({
         required: 'email cannot be blank',
         index: { unique: true },
         type: String,
-        trim: true
+        trim: true,
+        lowercase: true
     },
     permissions: {
         canCreateUsers: {

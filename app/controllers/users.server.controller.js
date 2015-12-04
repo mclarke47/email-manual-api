@@ -15,7 +15,6 @@ exports.list = (req, res) => {
     const options = {};
 
     User.find(options,  { __v: 0, permissions: 0 })
-        .sort({ email: -1 })
         .exec((findErr, users) => {
             /* istanbul ignore if */
             if (findErr) {
