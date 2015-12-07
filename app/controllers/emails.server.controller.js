@@ -291,10 +291,10 @@ exports.emailById = (req, res, next, id) => {
 
 function allowedPatchWhenScheduled (requestBody) {
     // If the email has been scheduled, we only allow a PATCH with a single property.
-    // This property can either be 'sent' or 'sendTime'
+    // This property can either be 'sent' or 'sendTime' of 'failed'
 
     let keys = Object.keys(requestBody);
 
-    return (keys.length === 1 && ['sendTime', 'sent'].indexOf(keys[0]) > -1);
+    return (keys.length === 1 && ['sendTime', 'sent', 'failed'].indexOf(keys[0]) > -1);
 
 }
