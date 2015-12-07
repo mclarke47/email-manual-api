@@ -58,6 +58,11 @@ const emailSchema = new Schema({
         default: false,
         index: true
     },
+    failed: {
+        type: Boolean,
+        default: false,
+        index: true
+    },
     toSubEdit: {
         type: Boolean,
         default: false,
