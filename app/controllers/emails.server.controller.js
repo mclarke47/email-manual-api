@@ -219,21 +219,24 @@ exports.patch = (req, res) => {
         requestBody.dirty = true;
     }
 
-    email = _.merge(email, requestBody);
+    let emailObj = email.toObject();
+
+    _.merge(emailObj, requestBody);
 
 
     email.updatedOn = Date.now();
 
-    email.save((saveErr) => {
-        if (saveErr) {
+    Email.update({ _id: emailObj._id }, emailObj, { runValidators: true }, (updateErr) => {
+        if (updateErr) {
             return res.status(400).send({
-                message: saveErr.message
+                message: updateErr.message
             });
         }
         else {
-            res.json(email);
+            return res.json(emailObj);
         }
     });
+
 };
 
 exports.delete = function(req, res) {
