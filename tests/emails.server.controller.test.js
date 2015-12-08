@@ -479,7 +479,7 @@ describe('Email CRUD tests:', () => {
 
                     // Set message assertion
                     should.exist(emailPatchRes);
-                    (emailPatchRes.body.message).should.equal('Email validation failed');
+                    (emailPatchRes.body.message).should.equal('Cast to ObjectId failed for value "" at path "template"');
 
                     // Handle list save error
                     done(emailPatchErr);
