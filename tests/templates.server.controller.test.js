@@ -353,7 +353,7 @@ describe('Template CRUD tests:', () => {
 
                     // Set message assertion
                     should.exist(templatePatchRes);
-                    (templatePatchRes.body.message).should.equal('Template validation failed');
+                    (templatePatchRes.body.message).should.equal('Validation failed');
 
                     // Handle list save error
                     done(templatePatchErr);

@@ -83,9 +83,11 @@ exports.patch = (req, res) => {
 
     let template = req.template;
 
-    template = _.merge(template, req.body);
+    let templateObj = template.toObject();
 
-    fs.readFile(template.path, {encoding: 'utf8'}, (err) => {
+    _.merge(templateObj, req.body);
+
+    fs.readFile(templateObj.path, {encoding: 'utf8'}, (err) => {
 
         if (err) {
             return res.status(400).send({
@@ -93,16 +95,17 @@ exports.patch = (req, res) => {
             });
         }
 
-        template.save((saveErr) => {
-            if (saveErr) {
+        Template.update({ _id: templateObj._id }, templateObj, { runValidators: true }, (updateErr) => {
+            if (updateErr) {
                 return res.status(400).send({
-                    message: saveErr.message
+                    message: updateErr.message
                 });
             }
             else {
-                res.json(template);
+                return res.json(templateObj);
             }
         });
+
     });
 };
 
