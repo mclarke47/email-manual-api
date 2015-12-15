@@ -24,7 +24,11 @@ exports.list = (req, res) => {
      * The "template" filter
      */
     if (req.query.t) {
-        options.template = req.query.t;
+        let templates = req.query.t.split(',');
+        let or = templates.map((template) => {
+            return { template: template };
+        });
+        options.$or = or;
     }
 
     /**
