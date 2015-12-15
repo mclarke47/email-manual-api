@@ -45,6 +45,26 @@ const userSchema = new Schema({
         canDeleteEmails: {
             type: Schema.Types.Mixed,
             default: false
+        },
+        canCreateTemplates: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canReadTemplates: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canUpdateTemplates: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canDeleteTemplates: {
+            type: Schema.Types.Mixed,
+            default: false
+        },
+        canReadAnalytics: {
+            type: Schema.Types.Mixed,
+            default: true
         }
     }
 });
