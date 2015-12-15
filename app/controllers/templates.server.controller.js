@@ -11,7 +11,20 @@ const Template = mongoose.model('Template');
 
 exports.list = (req, res) => {
 
-    Template.find({})
+    let options = {};
+
+    /**
+     * The "template" filter
+     */
+    if (req.query.t) {
+        let templates = req.query.t.split(',');
+        let or = templates.map((template) => {
+            return { template: template };
+        });
+        options.$or = or;
+    }
+
+    Template.find(options)
         .exec((findErr, templates) => {
             /* istanbul ignore if */
             if (findErr) {
