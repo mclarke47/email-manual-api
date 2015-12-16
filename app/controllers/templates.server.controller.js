@@ -19,7 +19,7 @@ exports.list = (req, res) => {
     if (req.query.t) {
         let templates = req.query.t.split(',');
         let or = templates.map((template) => {
-            return { template: template };
+            return { _id: template };
         });
         options.$or = or;
     }
