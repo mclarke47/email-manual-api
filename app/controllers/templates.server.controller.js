@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 const fs = require('fs');
-const _ = require('lodash');
+const extend = require('extend');
 
 const Template = mongoose.model('Template');
 
@@ -98,7 +98,7 @@ exports.patch = (req, res) => {
 
     let templateObj = template.toObject();
 
-    _.merge(templateObj, req.body);
+    extend(templateObj, req.body);
 
     fs.readFile(templateObj.path, {encoding: 'utf8'}, (err) => {
 

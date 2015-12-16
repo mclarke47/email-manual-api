@@ -3,7 +3,7 @@
 // External modules
 const should = require('should');
 const mongoose = require('mongoose');
-const _ = require('lodash');
+const extend = require('extend');
 
 // Internal Modules
 const app = require('../server');
@@ -51,7 +51,7 @@ describe('Template Model Unit Tests:', function() {
 
         it('should throw an error trying to save without name', (done) => {
 
-            _.merge(template , { name: '' });
+            extend(template , { name: '' });
 
             return template.save((err) => {
                 should.exist(err);
@@ -61,7 +61,7 @@ describe('Template Model Unit Tests:', function() {
 
         it('should throw an error trying to save without path', (done) => {
 
-            _.merge(template , { path: '' });
+            extend(template , { path: '' });
 
             return template.save((err) => {
                 should.exist(err);

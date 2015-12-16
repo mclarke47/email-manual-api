@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const _ = require('lodash');
+const extend = require('extend');
 const htmlToText = require('html-to-text');
 const fs = require('fs');
 
@@ -225,7 +225,7 @@ exports.patch = (req, res) => {
 
     let emailObj = email.toObject();
 
-    _.merge(emailObj, requestBody);
+    extend(emailObj, requestBody);
 
 
     email.updatedOn = Date.now();
