@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const _ = require('lodash');
+const extend = require('extend');
 
 const User = mongoose.model('User');
 
@@ -66,7 +66,7 @@ exports.patch = (req, res) => {
     let userObject = req.user.toObject();
     let requestBody = req.body;
 
-    _.merge(userObject, requestBody);
+    extend(userObject, requestBody);
 
     User.update({ _id: userObject._id }, userObject, { runValidators: true }, (updateErr) => {
         if (updateErr) {

@@ -3,7 +3,7 @@
 // External modules
 const should = require('should');
 const mongoose = require('mongoose');
-const _ = require('lodash');
+const extend = require('extend');
 
 // Internal Modules
 const app = require('../server');
@@ -42,7 +42,7 @@ describe('User Model Unit Tests:', function() {
 
         it('should throw an error trying to save without email', (done) => {
 
-            _.merge(user , { email: '' });
+            extend(user , { email: '' });
 
             return user.save((err) => {
                 should.exist(err);
