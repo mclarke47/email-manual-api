@@ -14,7 +14,7 @@ exports.list = (req, res) => {
 
     const options = {};
 
-    User.find(options,  { __v: 0, permissions: 0 })
+    User.find(options,  { __v: 0 })
         .exec((findErr, users) => {
             /* istanbul ignore if */
             if (findErr) {
