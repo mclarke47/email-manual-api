@@ -228,7 +228,7 @@ exports.patch = (req, res) => {
     extend(emailObj, requestBody);
 
 
-    email.updatedOn = Date.now();
+    emailObj.updatedOn = Date.now();
 
     Email.update({ _id: emailObj._id }, emailObj, { runValidators: true }, (updateErr) => {
         if (updateErr) {
