@@ -45,8 +45,7 @@ const templateSchema = new Schema({
     fields: [{
         label: {
             type: String,
-            trim: true,
-            required: 'field_label cannot be blank'
+            trim: true
         },
         name: {
             type: String,
@@ -57,7 +56,6 @@ const templateSchema = new Schema({
         type: {
             type: String,
             trim: true,
-            enum: ['textbox', 'wysiwyg', 'footerWidget', 'authorWidget', 'newsFeed'],
             required: 'field_type cannot be blank'
         }
     }]
