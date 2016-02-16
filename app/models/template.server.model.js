@@ -29,12 +29,12 @@ const templateSchema = new Schema({
         address: {
             type: String,
             trim: true,
-            required: 'from_address cannot be blank'
+            default: 'FT@newsletters.ft.com'
         },
         name: {
             type: String,
             trim: true,
-            required: 'from_name cannot be blank'
+            default: 'Financial Times'
         }
     },
     list: {
