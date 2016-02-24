@@ -51,7 +51,7 @@ module.exports = (req, res) => {
             else {
                 //We have successfully retrieved an email
                 let body = email.body;
-                let subject = email.subject;
+                let subject = 'TEST: ' + email.subject;
                 let from = email.template.from;
 
                 Promise.all(recipients.map((to) => sendClient.sendByAddress(emailId, from, to, subject, body)))
