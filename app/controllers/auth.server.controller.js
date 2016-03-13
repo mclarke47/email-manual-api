@@ -67,6 +67,7 @@ exports.authenticate = (req, res) => {
                     return res.send({ token: token, profile: profile, user: user });
 
                 } else {
+                    console.log('Unauthorised: ', userEmail);
                     return res.status(401).send({
                         message: 'Unauthorized'
                     });
