@@ -1,164 +1,270 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>FT</title>
     <style type="text/css">
-    ReadMsgBody {
-    width: 100%;
-    }
-    .ExternalClass {
-    width: 100%;
-    }
-    .ExternalClass,
-    .ExternalClass p,
-    .ExternalClass span,
-    .ExternalClass font,
-    .ExternalClass td,
-    .ExternalClass div {
-    line-height: 100%;
-    }
-    body {
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    margin: 0 !important;
-    padding: 0 !important;
-    }
-    table td {
-    border-collapse: collapse;
-    }
-    img {
-    outline: 0;
-    }
-    a img {
-    border: none;
-    }
-    p {
-    margin: 0;
-    }
-    @-ms-viewport {
-    width: device-width;
-    }
-    p a[href] {
-    color: #275e86!important;
-    text-decoration: none!important;
-    }
-    p a[href~=""] {
-    color: #275e86!important;
-    text-decoration: none!important;
-    }
-    p a[href]:hover {
-    text-decoration: underline!important;
-    }
-    @media only screen and (max-width: 800px) {
-    body[yahoo] .email-container {
-    width: 100% !important;
-    }
-    body[yahoo] .mobile-hidden {
-    display: none !important;
-    }
-    body[yahoo] .logo {
-    display: block !important;
-    padding: 0 !important;
-    }
-    body[yahoo] .photo img {
-    width: 100% !important;
-    height: auto !important;
-    }
-    body[yahoo] .nav5,
-    body[yahoo] .nav6 {
-    display: none !important;
-    }
-    .size {
-    background-color: green
+    div, p, a, li, td { -webkit-text-size-adjust:none;-ms-text-size-adjust:none;}
+    body {margin:0;padding:0;}
+    table td {border-collapse:collapse;}
+    .externalclass {width:100%;}
+    .externalclass * {line-height: 100%}
+    @media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
+    a[href^="tel"], a[href^="sms"], p a {
+    color: #2e6e9e !important;
+    text-decoration:none !important;
     }
     }
-    @media only screen and (min-width: 401px) {
-    table[data-social-links] {
-    padding-bottom: 0!important;
+    @media only screen and (max-width: 420px)
+    {
+    table[class="hide"], img[class="hide"], td[class="hide"], br[class="hide"], span[class="hide"] {
+    display:none !important;
     }
-    div[data-article-header=""] {
-    font-size: 24px!important;
-    line-height: 28px!important;
-    padding-top: 30px!important;
+    *[class].show {
+    display:block !important;
+    overflow:visible !important;
+    float:none !important;
+    width:100%;
+    height:auto !important;
+    max-height: none !important;
     }
-    .bodyPadding {
-    padding-left: 20px!important;
-    padding-right: 20px!important;
+    table[class="fluid"], td[class="fluid"], img[class="fluid"] {
+    width:100% !important;
+    height:auto !important;
+    display:table !important;
     }
-    .heading {
-    padding-top: 30px !important;
+    table[class=w320], td[class=w320], div[class=w320], img[class=w320]{
+    width:100% !important;
+    height:auto !important;
     }
-    .size {
-    background-color: red
+    table[class=w320h210], td[class=w320h210], div[class=w320h210], img[class=w320h210]{
+    width:100% !important;
+    height:auto !important;
     }
-    .email-container {
-    max-width: 700px !important;
+    table[class=w320h10], td[class=w320h10], div[class=w320h10], img[class=w320h10]{
+    width:320px !important;
+    height:10px !important;
     }
-    .footerBodyMargin {
-    margin: 0 50px;
+    table[class=w320pt15], td[class=w320pt15], div[class=w320pt15], img[class=w320pt15]{
+    width:320px !important;
+    padding-top:20px !important;
     }
-    .bodyText,
-    .bodyText p {
-    font-size: 20px !important;
+    table[class=w300h1], td[class=w300h1], div[class=w300h1], img[class=w300h1]{
+    width:300px !important;
+    height:auto !important;
     }
-    .marketsDataFooter {
-    padding-left: 20px;
-    padding-right: 20px;
+    table[class=w300], td[class=w300], div[class=w300], img[class=w300]{
+    width:300px !important;
+    height:auto !important;
     }
+    table[class=w205], td[class=w205], div[class=w205], img[class=w205]{
+    width:205px !important;
+    height:auto !important;
+    }
+    table[class=ww216h120], td[class=w216h120], div[class=w216h120], img[class=w216h120]{
+    width:216px !important;
+    height:120px !important;
+    }
+    table[class=w290], td[class=w290], div[class=w290], img[class=w290]{
+    width:290px !important;
+    height:auto !important;
+    }
+    table[class=w320d], td[class=w320d], div[class=w320d], img[class=w320d]{
+    width:100% !important;
+    height:auto !important;
+    display:table !important;
+    }
+    table[class=w100], td[class=w100], div[class=w100], img[class=w100]{
+    width:100px !important;
+    height:auto !important;
+    }
+    table[class=w180], td[class=w180], div[class=w180], img[class=w180]{
+    width:180px !important;
+    height:auto !important;
+    }
+    table[class=w280], td[class=w280], div[class=w280], img[class=w280]{
+    width:280px !important;
+    height:auto !important;
+    }
+    table[class=w280fs13], td[class=w280fs13], div[class=w280fs13], img[class=w280fs13]{
+    width:280px !important;
+    height:auto !important;
+    font-size:13px !important;
+    line-height:16px !important;
+    }
+    table[class=w300fs13], td[class=w300fs13], div[class=w300fs13], img[class=w300fs13]{
+    width:300px !important;
+    height:auto !important;
+    font-size:13px !important;
+    line-height:16px !important;
+    }
+    table[class=w230fs15], td[class=w230fs15], div[class=w230fs15], img[class=w230fs15]{
+    width:230px !important;
+    height:auto !important;
+    font-size:15px !important;
+    line-height:18px !important;
+    }
+    table[class=w270], td[class=w270], div[class=w270], img[class=w270]{
+    width:270px !important;
+    height:auto !important;
+    }
+    table[class=w270pr20], td[class=w270pr20], div[class=w270pr20], img[class=w270pr20]{
+    width:270px !important;
+    height:auto !important;
+    padding-right:20px !important;
+    }
+    table[class=w260], td[class=w260], div[class=w260], img[class=w260]{
+    width:260px !important;
+    height:auto !important;
+    }
+    table[class=w300fs16], td[class=w300fs16], div[class=w300fs16], img[class=w300fs16]{
+    width:300px !important;
+    height:30px !important;
+    font-size:16px !important;
+    line-height:19px !important;
+    }
+    table[class=w260fs13], td[class=w260fs13], div[class=w260fs13], img[class=w260fs13]{
+    width:260px !important;
+    height:auto !important;
+    font-size:13px !important;
+    line-height:16px !important;
+    }
+    table[class=w240fs13], td[class=w240fs13], div[class=w240fs13], img[class=w240fs13]{
+    width:240px !important;
+    height:auto !important;
+    font-size:13px !important;
+    line-height:16px !important;
+    }
+    table[class=w250], td[class=w250], div[class=w250], img[class=w250]{
+    width:250px !important;
+    height:auto !important;
+    }
+    table[class=w240], td[class=w240], div[class=w240], img[class=w240]{
+    width:240px !important;
+    height:auto !important;
+    }
+    table[class=w230], td[class=w230], div[class=w230], img[class=w230]{
+    width:230px !important;
+    height:auto !important;
+    }
+    table[class=w160], td[class=w160], div[class=w160], img[class=w160]{
+    width:160px !important;
+    height:auto !important;
+    }
+    table[class=w25], td[class=w25], div[class=w25], img[class=w25]{
+    width:25px !important;
+    height:auto !important;
+    }
+    table[class=w70], td[class=w70], div[class=w70], img[class=w70]{
+    width:70px !important;
+    height:auto !important;
+    }
+    table[class=w66], td[class=w66], div[class=w66], img[class=w66]{
+    width:66px !important;
+    height:auto !important;
+    }
+    table[class=w50], td[class=w70], div[class=w50], img[class=w50]{
+    width:50px !important;
+    height:auto !important;
+    }
+    table[class=w46], td[class=w46], div[class=w46], img[class=w46]{
+    width:46px !important;
+    height:auto !important;
+    }
+    table[class=w20], td[class=w20], div[class=w20], img[class=w20]{
+    width:20px !important;
+    height:auto !important;
+    }
+    table[class=w20white], td[class=w20white], div[class=w20white], img[class=w20white]{
+    width:20px !important;
+    height:auto !important;
+    background-color:#ffffff !important;
+    }
+    table[class=pleft15], td[class=pleft15], div[class=pleft15], img[class=pleft15]{
+    padding-left:15px !important;
+    }
+    table[class=w320white], td[class=w320white], div[class=w320white], img[class=w320white]{
+    width:320px !important;
+    height:10px !important;
+    background-color:#ffffff !important;
+    }
+    table[class=w10], td[class=w10], div[class=w10], img[class=w10]{
+    width:5px !important;
+    height:auto !important;
+    }
+    mobwhite [class=mobwhite], td[class=mobwhite], div[class=mobwhite], img[class=mobwhite]{
+    background-color:#ffffff !important;
+    }
+    table[class=h15], td[class=h15], div[class=h15], img[class=h15] {
+    height:15px !important;
+    width:auto !important;
+    }
+    }
+    a.subscribeLink {
+    color: #FFFFFF !important;
+    text-decoration:none !important;
+    }
+    .articleTitle a {
+    color: #c96e00 !important;
+    text-decoration:none !important;
     }
     </style>
+    <style type="text/css" media="all">
+    td:hover#bg_topnav{background-color:#d4d61d !important; color:#ffffff !important;}
+    td:hover#pulse_cta{font-size:20px !important;}
+    a:hover#pulse_cta{font-size:16px !important;}
+    img:hover#fadeout{opacity:0.5;transition: opacity .5s ease;}
+    td:hover#fadeout{opacity:0.5;transition: opacity .5s ease;}
+    a:hover#whitetext {color:#ffffff !important;}
+    </style>
+    <!--[if gte mso 15]>
+    <style type="text/css" media="all">
+    tr { font-size:1px; mso-line-height-alt:0; mso-margin-top-alt:1px; }
+    </style>
+    <![endif]-->
   </head>
-  <body bgcolor="#FFFFFF" text="#000000" yahoo="fix">
-    <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" style="font-family: Georgia, serif; background-color: #fff; color: #333; margin: 0px; padding:0px; -webkit-text-size-adjust:none; font-size: 20px;">
-      <!-- Restricted width Content -->
+  <body style="margin:0; padding:0;" b-gcolor="#fff1e0">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" b-gcolor="#fff1e0">
       <tr>
-        <td align="center">
-          <!-- Restrict to width 700 -->
-          <table id="outer" cellspacing="0" cellpadding="0" border="0" class="email-container" align="center" style="max-width:660px; width:100%; background-color:#FFF1E0">
-            <!-- Rise Logo -->
-            <tr>
-              <td>
-                {{permalink}}
-
-                {{header}}
-                <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                  <tbody>
-                    <tr>
-                      <td style="padding-left:15px;padding-top:15px;padding-right:15px">
-                        {{authorWidget}}
-
-                        {{comment}}
-
-                        {{newsFeed}}
-
-                        {{comment2}}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                {{ad}}
-
-                <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                  <tbody>
-                    <tr>
-                      <td style="padding-left:15px;padding-top:15px;padding-right:15px">
-                        {{newsFeed2}}
-
-                        {{comment3}}
-
-                        {{social}}
-
-                        {{footer}}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-              </td>
-            </tr>
-          </table>
+        <td align="left" valign="top">
+          <div align="center">
+            <table id="outer" cellspacing="0" cellpadding="0" border="0" class="email-container" align="center" bgcolor="#fff1e0" style="max-width:660px; width:100%; background-color:#FFF1E0">
+              <!-- Rise Logo -->
+              <tr>
+                <td>
+                  {{permalink}}
+                  {{header}}
+                  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="padding-left:15px;padding-top:15px;padding-right:15px">
+                          {{authorWidget}}
+                          {{comment}}
+                          {{newsFeed}}
+                          {{comment2}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  {{ad}}
+                  <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="padding-left:15px;padding-top:15px;padding-right:15px">
+                          {{newsFeed2}}
+                          {{comment3}}
+                          {{social}}
+                          {{footer}}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </div>
         </td>
       </tr>
     </table>
