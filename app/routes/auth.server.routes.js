@@ -4,6 +4,6 @@ const auth = require('../controllers/auth.server.controller');
 
 module.exports = (app) => {
 
-    app.route('/auth')
+    app.route('/eme-auth')
     .post(auth.authenticate);
 };
