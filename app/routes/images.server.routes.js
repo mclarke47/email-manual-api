@@ -7,9 +7,9 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 module.exports = (app) => {
-    app.route('/images')
+    app.route('/eme-images')
         /**
-         * @api {post} /images Upload an image.
+         * @api {post} /eme-images Upload an image.
          * @apiVersion 0.0.1
          * @apiName UploadImages
          * @apiGroup Image
@@ -28,7 +28,7 @@ module.exports = (app) => {
          */
         .post(ensureAuthenticated, upload.single('image'), images.upload)
         /**
-         * @api {get} /images Get all the Images.
+         * @api {get} /eme-images Get all the Images.
          * @apiVersion 0.0.1
          * @apiName GetImages
          * @apiGroup Image
