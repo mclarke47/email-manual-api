@@ -75,9 +75,9 @@ module.exports = (app) => {
      *     }
      */
 
-    app.route('/templates')
+    app.route('/eme-templates')
         /**
-         * @api {get} /templates Get all the Templates.
+         * @api {get} /eme-templates Get all the Templates.
          * @apiVersion 0.0.1
          * @apiName GetTemplates
          * @apiGroup Template
@@ -116,7 +116,7 @@ module.exports = (app) => {
         .get(ensureAuthenticated, templates.list)
 
         /**
-         * @api {post} /templates/ Create a Template.
+         * @api {post} /eme-templates/ Create a Template.
          * @apiVersion 0.0.1
          * @apiName CreateTemplate
          * @apiGroup Template
@@ -131,10 +131,10 @@ module.exports = (app) => {
          */
         .post(ensureAuthenticated, templates.create);
 
-    app.route('/templates/:templateId')
+    app.route('/eme-templates/:templateId')
 
         /**
-         * @api {get} /templates/:templateId Get Template information.
+         * @api {get} /eme-templates/:templateId Get Template information.
          * @apiVersion 0.0.1
          * @apiName GetTemplate
          * @apiGroup Template
@@ -152,7 +152,7 @@ module.exports = (app) => {
 
 
         /**
-         * @api {patch} /templates/:templateId Update Template information.
+         * @api {patch} /eme-templates/:templateId Update Template information.
          * @apiVersion 0.0.1
          * @apiName PatchTemplate
          * @apiGroup Template
@@ -171,7 +171,7 @@ module.exports = (app) => {
         .patch(ensureAuthenticated, templates.patch)
 
         /**
-         * @api {delete} /templates/:templateId Delete Template information.
+         * @api {delete} /eme-templates/:templateId Delete Template information.
          * @apiVersion 0.2.0
          * @apiName DeleteTemplate
          * @apiGroup Template
