@@ -104,9 +104,9 @@ module.exports = (app) => {
      *     }
      */
 
-    app.route('/emails')
+    app.route('/eme-emails')
     /**
-     * @api {get} /emails Get all the Emails.
+     * @api {get} /eme-emails Get all the Emails.
      * @apiVersion 0.0.1
      * @apiName GetEmails
      * @apiGroup Email
@@ -169,7 +169,7 @@ module.exports = (app) => {
         .get(ensureAuthenticated, emails.list)
 
     /**
-     * @api {post} /emails/ Create a Email.
+     * @api {post} /eme-emails/ Create a Email.
      * @apiVersion 0.2.0
      * @apiName CreateEmail
      * @apiGroup Email
@@ -184,9 +184,9 @@ module.exports = (app) => {
      */
         .post(ensureAuthenticated, emails.create);
 
-    app.route('/emails/:emailId')
+    app.route('/eme-emails/:emailId')
     /**
-     * @api {get} /email/:emailId Get Email information.
+     * @api {get} /eme-email/:emailId Get Email information.
      * @apiVersion 0.2.0
      * @apiName GetEmail
      * @apiGroup Email
@@ -202,7 +202,7 @@ module.exports = (app) => {
      */
         .get(ensureAuthenticated, emails.read)
     /**
-     * @api {patch} /emails/:emailId Update Email information.
+     * @api {patch} /eme-emails/:emailId Update Email information.
      * @apiVersion 0.2.0
      * @apiName PatchEmail
      * @apiGroup Email
@@ -220,7 +220,7 @@ module.exports = (app) => {
      */
         .patch(ensureAuthenticated, emails.patch)
     /**
-     * @api {delete} /emails/:emailId Delete Email information.
+     * @api {delete} /eme-emails/:emailId Delete Email information.
      * @apiVersion 0.2.0
      * @apiName DeleteEmail
      * @apiGroup Email
