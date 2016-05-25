@@ -64,11 +64,11 @@ describe('Email CRUD tests:', () => {
 
     });
 
-    /** POST /emails **/
+    /** POST /eme-emails **/
 
     it('should be able to save an email', (done) => {
         agent
-            .post('/emails')
+            .post('/eme-emails')
             .set('Authorization', 'Bearer ' + token)
             .send(email)
             .expect(201)
@@ -107,7 +107,7 @@ describe('Email CRUD tests:', () => {
         email.sendTime = 'now';
 
         agent
-            .post('/emails')
+            .post('/eme-emails')
             .set('Authorization', 'Bearer ' + token)
             .send(email)
             .expect(201)
@@ -145,7 +145,7 @@ describe('Email CRUD tests:', () => {
         email = email.toObject();
         email.template = '';
 
-        agent.post('/emails')
+        agent.post('/eme-emails')
             .set('Authorization', 'Bearer ' + token)
             .send(email)
             .expect(400)
@@ -163,7 +163,7 @@ describe('Email CRUD tests:', () => {
 
     it('should not be able to save an email if no auth token is provided', (done) => {
 
-        agent.post('/emails')
+        agent.post('/eme-emails')
             .send(email)
             .expect(401)
             .end((emailSaveErr, emailSaveRes) => {
@@ -183,7 +183,7 @@ describe('Email CRUD tests:', () => {
         };
 
         agent
-            .post('/emails')
+            .post('/eme-emails')
             .set('Authorization', 'Bearer ' + token)
             .send(email)
             .expect(400)
@@ -205,7 +205,7 @@ describe('Email CRUD tests:', () => {
         };
 
         agent
-            .post('/emails')
+            .post('/eme-emails')
             .set('Authorization', 'Bearer ' + token)
             .send(email)
             .expect(201)
@@ -235,14 +235,14 @@ describe('Email CRUD tests:', () => {
 
     });
 
-    /** GET /emails **/
+    /** GET /eme-emails **/
 
     it('should be able to get a list of emails', (done) => {
 
         email.save(() => {
 
             agent
-                .get('/emails')
+                .get('/eme-emails')
                 .set('Authorization', 'Bearer ' + token)
                 .end((emailsGetErr, emailsGetRes) => {
 
@@ -262,7 +262,7 @@ describe('Email CRUD tests:', () => {
         email.save(() => {
 
             agent
-                .get('/emails')
+                .get('/eme-emails')
                 .expect(401)
                 .end((emailsGetErr, emailsGetRes) => {
 
@@ -276,14 +276,14 @@ describe('Email CRUD tests:', () => {
         });
     });
 
-    /** GET /emails/:emailId **/
+    /** GET /eme-emails/:emailId **/
 
     it('should be able to get a single email', (done) => {
 
         email.save(() => {
 
             agent
-                .get('/emails/' + email._id)
+                .get('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .end((emailGetErr, emailGetRes) => {
 
@@ -303,7 +303,7 @@ describe('Email CRUD tests:', () => {
         email.save(() => {
 
             agent
-                .get('/emails/' + email._id)
+                .get('/eme-emails/' + email._id)
                 .expect(401)
                 .end((emailGetErr, emailGetRes) => {
 
@@ -318,7 +318,7 @@ describe('Email CRUD tests:', () => {
         });
     });
 
-    /** PATCH /emails/:emailId **/
+    /** PATCH /eme-emails/:emailId **/
 
     it('should be able to patch an email', (done) => {
 
@@ -328,7 +328,7 @@ describe('Email CRUD tests:', () => {
 
 
             agent
-                .patch('/emails/' + email._id)
+                .patch('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchEmail)
                 .expect(200)
@@ -358,7 +358,7 @@ describe('Email CRUD tests:', () => {
 
 
             agent
-                .patch('/emails/' + email._id)
+                .patch('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchEmail)
                 .expect(200)
@@ -388,7 +388,7 @@ describe('Email CRUD tests:', () => {
             let patchEmail = { body: { html: '<p>Some other text</p>' } };
 
             agent
-                .patch('/emails/' + email._id)
+                .patch('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchEmail)
                 .expect(200)
@@ -415,7 +415,7 @@ describe('Email CRUD tests:', () => {
             let patchEmail = { dirty: false };
 
             agent
-                .patch('/emails/' + email._id)
+                .patch('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchEmail)
                 .expect(200)
@@ -442,7 +442,7 @@ describe('Email CRUD tests:', () => {
             let patchEmail = { body: { plain: 'Some other text' } };
 
             agent
-                .patch('/emails/' + email._id)
+                .patch('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchEmail)
                 .expect(400)
@@ -471,7 +471,7 @@ describe('Email CRUD tests:', () => {
             let patchEmail = { template: '' };
 
             agent
-                .patch('/emails/' + email._id)
+                .patch('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchEmail)
                 .expect(400)
@@ -494,7 +494,7 @@ describe('Email CRUD tests:', () => {
         email.save(() => {
 
             agent
-                .patch('/emails/' + email._id)
+                .patch('/eme-emails/' + email._id)
                 .expect(401)
                 .end((emailPatchErr, emailPatchRes) => {
 
@@ -519,7 +519,7 @@ describe('Email CRUD tests:', () => {
             let patchEmail = { template: '' };
 
             agent
-                .patch('/emails/' + email._id)
+                .patch('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchEmail)
                 .expect(400)
@@ -548,7 +548,7 @@ describe('Email CRUD tests:', () => {
             let patchEmail = { subject: 'Some subject' };
 
             agent
-                .patch('/emails/' + email._id)
+                .patch('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchEmail)
                 .expect(400)
@@ -566,14 +566,14 @@ describe('Email CRUD tests:', () => {
         });
     });
 
-    /** DELETE /emails/:emailId **/
+    /** DELETE /eme-emails/:emailId **/
 
     it('should be able to delete a email', (done) => {
 
         email.save(() => {
 
             agent
-                .delete('/emails/' + email._id)
+                .delete('/eme-emails/' + email._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(email)
                 .expect(200)
@@ -609,7 +609,7 @@ describe('Email CRUD tests:', () => {
         email.save(() => {
 
             agent
-                .delete('/emails/' + email._id)
+                .delete('/eme-emails/' + email._id)
                 .expect(401)
                 .end((emailDeleteErr, emailDeleteRes) => {
 
@@ -629,7 +629,7 @@ describe('Email CRUD tests:', () => {
     it('returns an error if an invalid _id is provided', (done) => {
         email.save(() => {
             agent
-                .get('/emails/' + 'invalidId')
+                .get('/eme-emails/' + 'invalidId')
                 .set('Authorization', 'Bearer ' + token)
                 .expect(400)
                 .end((emailGetErr, emailGetRes) => {
@@ -651,7 +651,7 @@ describe('Email CRUD tests:', () => {
 
         email.save(() => {
             agent
-                .get('/emails/' + randomId)
+                .get('/eme-emails/' + randomId)
                 .set('Authorization', 'Bearer ' + token)
                 .expect(404)
                 .end((emailGetErr, emailGetRes) => {
@@ -673,7 +673,7 @@ describe('Email CRUD tests:', () => {
 
         email.save(() => {
             agent
-                .get('/emails/')
+                .get('/eme-emails/')
                 .set('Authorization', 'Bearer ' + randomJWT)
                 .expect(401)
                 .end((emailGetErr, emailGetRes) => {
@@ -700,7 +700,7 @@ describe('Email CRUD tests:', () => {
 
         email.save(() => {
             agent
-                .get('/emails/')
+                .get('/eme-emails/')
                 .set('Authorization', 'Bearer ' + expiredJWT)
                 .expect(401)
                 .end((emailGetErr, emailGetRes) => {
@@ -735,7 +735,7 @@ describe('Email CRUD tests:', () => {
             email2.save(() => {
 
                 // Request the second email
-                agent.get('/emails?pp=1&p=2')
+                agent.get('/eme-emails?pp=1&p=2')
                     .set('Authorization', 'Bearer ' + token)
                     .end((gerEmailErr, getEmailRes) => {
 
@@ -785,7 +785,7 @@ describe('Email CRUD tests:', () => {
                 email2.save(() => {
 
                     // Request the second email
-                    agent.get('/emails?t=' + template2._id)
+                    agent.get('/eme-emails?t=' + template2._id)
                         .set('Authorization', 'Bearer ' + token)
                         .end((gerEmailErr, getEmailRes) => {
 
@@ -823,7 +823,7 @@ describe('Email CRUD tests:', () => {
             email2.save(() => {
 
                 // Request for the dirty emails
-                agent.get('/emails?dirty')
+                agent.get('/eme-emails?dirty')
                     .set('Authorization', 'Bearer ' + token)
                     .end((gerEmailErr, getEmailRes) => {
 
@@ -832,7 +832,7 @@ describe('Email CRUD tests:', () => {
                         (getEmailRes.body[0]._id).should.match(email2._id.toString());
 
                         // Request for the not-dirty emails
-                        agent.get('/emails?dirty=false')
+                        agent.get('/eme-emails?dirty=false')
                             .set('Authorization', 'Bearer ' + token)
                             .end((gerEmailErr, getEmailRes) => {
 
@@ -870,7 +870,7 @@ describe('Email CRUD tests:', () => {
             email2.save(() => {
 
                 // Request for the sent emails
-                agent.get('/emails?sent')
+                agent.get('/eme-emails?sent')
                     .set('Authorization', 'Bearer ' + token)
                     .end((gerEmailErr, getEmailRes) => {
 
@@ -879,7 +879,7 @@ describe('Email CRUD tests:', () => {
                         (getEmailRes.body[0]._id).should.match(email2._id.toString());
 
                         // Request for the not-sent emails
-                        agent.get('/emails?sent=false')
+                        agent.get('/eme-emails?sent=false')
                             .set('Authorization', 'Bearer ' + token)
                             .end((gerEmailErr, getEmailRes) => {
 
@@ -917,7 +917,7 @@ describe('Email CRUD tests:', () => {
             email2.save(() => {
 
                 // Request for the toSubEdit emails
-                agent.get('/emails?toSubEdit')
+                agent.get('/eme-emails?toSubEdit')
                     .set('Authorization', 'Bearer ' + token)
                     .end((gerEmailErr, getEmailRes) => {
 
@@ -926,7 +926,7 @@ describe('Email CRUD tests:', () => {
                         (getEmailRes.body[0]._id).should.match(email2._id.toString());
 
                         // Request for the not-toSubEdit emails
-                        agent.get('/emails?toSubEdit=false')
+                        agent.get('/eme-emails?toSubEdit=false')
                             .set('Authorization', 'Bearer ' + token)
                             .end((gerEmailErr, getEmailRes) => {
 
@@ -965,7 +965,7 @@ describe('Email CRUD tests:', () => {
             email2.save(() => {
 
                 // Request for the subEdited emails
-                agent.get('/emails?subEdited')
+                agent.get('/eme-emails?subEdited')
                     .set('Authorization', 'Bearer ' + token)
                     .end((gerEmailErr, getEmailRes) => {
 
@@ -974,7 +974,7 @@ describe('Email CRUD tests:', () => {
                         (getEmailRes.body[0]._id).should.match(email2._id.toString());
 
                         // Request for the not-subEdited emails
-                        agent.get('/emails?subEdited=false')
+                        agent.get('/eme-emails?subEdited=false')
                             .set('Authorization', 'Bearer ' + token)
                             .end((gerEmailErr, getEmailRes) => {
 
@@ -1012,7 +1012,7 @@ describe('Email CRUD tests:', () => {
             email2.save(() => {
 
                 // Request for the emails toSend
-                agent.get('/emails?toSend')
+                agent.get('/eme-emails?toSend')
                     .set('Authorization', 'Bearer ' + token)
                     .end((gerEmailErr, getEmailRes) => {
 

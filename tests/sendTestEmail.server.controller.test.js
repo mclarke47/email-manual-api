@@ -76,7 +76,7 @@ describe('Send Test Email tests:', () => {
             .stub(sendClient, 'sendByAddress', () => Promise.resolve({}));
 
         agent
-            .post('/send-test-email')
+            .post('/eme-send-test-email')
             .set('Authorization', 'Bearer ' + token)
             .send({
                 email: email._id,
@@ -105,7 +105,7 @@ describe('Send Test Email tests:', () => {
             .stub(sendClient, 'sendByAddress', () => Promise.reject({ message: 'Some error'}));
 
         agent
-            .post('/send-test-email')
+            .post('/eme-send-test-email')
             .set('Authorization', 'Bearer ' + token)
             .send({
                 email: email._id,
@@ -131,7 +131,7 @@ describe('Send Test Email tests:', () => {
     it('should return an error if no email ID is provided', (done) => {
 
         agent
-            .post('/send-test-email')
+            .post('/eme-send-test-email')
             .set('Authorization', 'Bearer ' + token)
             .send({
                 recipients
@@ -156,7 +156,7 @@ describe('Send Test Email tests:', () => {
     it('should return an error if no recipient is provided', (done) => {
 
         agent
-            .post('/send-test-email')
+            .post('/eme-send-test-email')
             .set('Authorization', 'Bearer ' + token)
             .send({
                 email: email._id
@@ -181,7 +181,7 @@ describe('Send Test Email tests:', () => {
     it('should return an error if no valid email ID is provided', (done) => {
 
         agent
-            .post('/send-test-email')
+            .post('/eme-send-test-email')
             .set('Authorization', 'Bearer ' + token)
             .send({
                 email: 'abcd',
@@ -207,7 +207,7 @@ describe('Send Test Email tests:', () => {
     it('should return an error if no existing email ID is provided', (done) => {
 
         agent
-            .post('/send-test-email')
+            .post('/eme-send-test-email')
             .set('Authorization', 'Bearer ' + token)
             .send({
                 email: '560148421142a603009d1356',

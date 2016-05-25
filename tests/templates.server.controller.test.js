@@ -50,11 +50,11 @@ describe('Template CRUD tests:', () => {
 
     });
 
-    /** POST /templates **/
+    /** POST /eme-templates **/
 
     it('should be able to save a template', (done) => {
         agent
-            .post('/templates')
+            .post('/eme-templates')
             .set('Authorization', 'Bearer ' + token)
             .send(template)
             .expect(201)
@@ -90,7 +90,7 @@ describe('Template CRUD tests:', () => {
         // Invalidate name field
         template.name = '';
 
-        agent.post('/templates')
+        agent.post('/eme-templates')
             .set('Authorization', 'Bearer ' + token)
             .send(template)
             .expect(400)
@@ -108,7 +108,7 @@ describe('Template CRUD tests:', () => {
 
     it('should not be able to save a template if no auth token is provided', (done) => {
 
-        agent.post('/templates')
+        agent.post('/eme-templates')
             .send(template)
             .expect(401)
             .end((templateSaveErr, templateSaveRes) => {
@@ -125,7 +125,7 @@ describe('Template CRUD tests:', () => {
 
         template.path = './templates/notExistingTemplate.html';
 
-            agent.post('/templates')
+            agent.post('/eme-templates')
                 .set('Authorization', 'Bearer ' + token)
                 .send(template)
                 .expect(400)
@@ -139,14 +139,14 @@ describe('Template CRUD tests:', () => {
                 });
     });
 
-    /** GET /templates **/
+    /** GET /eme-templates **/
 
     it('should be able to get a list of templates', (done) => {
 
         template.save(() => {
 
             agent
-                .get('/templates')
+                .get('/eme-templates')
                 .set('Authorization', 'Bearer ' + token)
                 .end((templatesGetErr, templatesGetRes) => {
 
@@ -167,7 +167,7 @@ describe('Template CRUD tests:', () => {
         template.save(() => {
 
             agent
-                .get('/templates')
+                .get('/eme-templates')
                 .set('Authorization', auth)
                 .end((templatesGetErr, templatesGetRes) => {
 
@@ -187,7 +187,7 @@ describe('Template CRUD tests:', () => {
         template.save(() => {
 
             agent
-                .get('/templates')
+                .get('/eme-templates')
                 .set('Authorization', auth)
                 .end((templatesGetErr, templatesGetRes) => {
 
@@ -207,7 +207,7 @@ describe('Template CRUD tests:', () => {
         template.save(() => {
 
             agent
-                .get('/templates')
+                .get('/eme-templates')
                 .set('Authorization', auth)
                 .expect(401)
                 .end((templatesGetErr, templatesGetRes) => {
@@ -227,7 +227,7 @@ describe('Template CRUD tests:', () => {
         template.save(() => {
 
             agent
-                .get('/templates')
+                .get('/eme-templates')
                 .expect(401)
                 .end((templatesGetErr, templatesGetRes) => {
 
@@ -242,14 +242,14 @@ describe('Template CRUD tests:', () => {
     });
 
 
-    /** GET /templates/:templateId **/
+    /** GET /eme-templates/:templateId **/
 
     it('should be able to get a single template', (done) => {
 
         template.save(() => {
 
             agent
-                .get('/templates/' + template._id)
+                .get('/eme-templates/' + template._id)
                 .set('Authorization', 'Bearer ' + token)
                 .end((templateGetErr, templateGetRes) => {
 
@@ -271,7 +271,7 @@ describe('Template CRUD tests:', () => {
         template.save(() => {
 
             agent
-                .get('/templates/' + template._id)
+                .get('/eme-templates/' + template._id)
                 .expect(400)
                 .set('Authorization', 'Bearer ' + token)
                 .end((templateGetErr, templateGetRes) => {
@@ -290,7 +290,7 @@ describe('Template CRUD tests:', () => {
         template.save(() => {
 
             agent
-                .get('/templates/' + template._id)
+                .get('/eme-templates/' + template._id)
                 .expect(401)
                 .end((templateGetErr, templateGetRes) => {
 
@@ -306,7 +306,7 @@ describe('Template CRUD tests:', () => {
     });
 
 
-    /** PATCH /templates/:templateId **/
+    /** PATCH /eme-templates/:templateId **/
 
     it('should be able to patch a template', (done) => {
 
@@ -316,7 +316,7 @@ describe('Template CRUD tests:', () => {
             
 
             agent
-                .patch('/templates/' + template._id)
+                .patch('/eme-templates/' + template._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchTemplate)
                 .expect(200)
@@ -345,7 +345,7 @@ describe('Template CRUD tests:', () => {
             let patchTemplate = { name: '' };
 
             agent
-                .patch('/templates/' + template._id)
+                .patch('/eme-templates/' + template._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchTemplate)
                 .expect(400)
@@ -368,7 +368,7 @@ describe('Template CRUD tests:', () => {
         template.save(() => {
 
             agent
-                .patch('/templates/' + template._id)
+                .patch('/eme-templates/' + template._id)
                 .expect(401)
                 .end((templatePatchErr, templatePatchRes) => {
 
@@ -391,7 +391,7 @@ describe('Template CRUD tests:', () => {
         template.save(() => {
 
 
-            agent.patch('/templates/' + template._id)
+            agent.patch('/eme-templates/' + template._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(patchTemplate)
                 .expect(400)
@@ -406,14 +406,14 @@ describe('Template CRUD tests:', () => {
         });
     });
 
-    /** DELETE /templates/:templateId **/
+    /** DELETE /eme-templates/:templateId **/
 
     it('should be able to delete a template', (done) => {
 
         template.save(() => {
 
             agent
-                .delete('/templates/' + template._id)
+                .delete('/eme-templates/' + template._id)
                 .set('Authorization', 'Bearer ' + token)
                 .send(template)
                 .expect(200)
@@ -449,7 +449,7 @@ describe('Template CRUD tests:', () => {
         template.save(() => {
 
             agent
-                .delete('/templates/' + template._id)
+                .delete('/eme-templates/' + template._id)
                 .expect(401)
                 .end((templateDeleteErr, templateDeleteRes) => {
 
@@ -469,7 +469,7 @@ describe('Template CRUD tests:', () => {
     it('returns an error if a wrongly formatted _id is provided when retrieving a template', (done) => {
         template.save(() => {
             agent
-                .get('/templates/' + 'invalidId')
+                .get('/eme-templates/' + 'invalidId')
                 .set('Authorization', 'Bearer ' + token)
                 .expect(400)
                 .end((templateGetErr, templateGetRes) => {
@@ -491,7 +491,7 @@ describe('Template CRUD tests:', () => {
 
         template.save(() => {
             agent
-                .get('/templates/' + randomId)
+                .get('/eme-templates/' + randomId)
                 .set('Authorization', 'Bearer ' + token)
                 .expect(404)
                 .end((templateGetErr, templateGetRes) => {
@@ -513,7 +513,7 @@ describe('Template CRUD tests:', () => {
 
         template.save(() => {
             agent
-                .get('/templates/')
+                .get('/eme-templates/')
                 .set('Authorization', 'Bearer ' + randomJWT)
                 .expect(401)
                 .end((templateGetErr, templateGetRes) => {
@@ -540,7 +540,7 @@ describe('Template CRUD tests:', () => {
 
         template.save(() => {
             agent
-                .get('/templates/')
+                .get('/eme-templates/')
                 .set('Authorization', 'Bearer ' + expiredJWT)
                 .expect(401)
                 .end((templateGetErr, templateGetRes) => {

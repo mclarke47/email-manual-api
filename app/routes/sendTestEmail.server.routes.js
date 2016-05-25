@@ -4,9 +4,9 @@ const ensureAuthenticated = require('../middlewares/ensureAuthenticated.server.u
 const sendTestEmail = require('../controllers/sendTestEmail.server.controller.js');
 
 module.exports = (app) => {
-    app.route('/send-test-email')
+    app.route('/eme-send-test-email')
         /**
-         * @api {post} /send-test-email Send a test email.
+         * @api {post} /eme-send-test-email Send a test email.
          * @apiVersion 0.2.0
          * @apiName SendTestEmail
          * @apiGroup Send

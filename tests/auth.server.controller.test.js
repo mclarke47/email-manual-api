@@ -13,7 +13,7 @@ const User = mongoose.model('User');
 
 const agent = supertest.agent(app);
 
-describe('The /auth endpoint', () => {
+describe('The /eme-auth endpoint', () => {
 
     describe('when a valid profile authenticates', () => {
         before((done) => {
@@ -51,7 +51,7 @@ describe('The /auth endpoint', () => {
             };
 
             agent
-                .post('/auth')
+                .post('/eme-auth')
                 .send(postBody)
                 .expect(200)
                 .end((authErr, authRes) => {
@@ -93,7 +93,7 @@ describe('The /auth endpoint', () => {
             };
 
             agent
-                .post('/auth')
+                .post('/eme-auth')
                 .send(postBody)
                 .expect(400)
                 .end((authErr, authRes) => {
@@ -139,7 +139,7 @@ describe('The /auth endpoint', () => {
             };
 
             agent
-                .post('/auth')
+                .post('/eme-auth')
                 .send(postBody)
                 .expect(401)
                 .end((authErr, authRes) => {
@@ -190,7 +190,7 @@ describe('The /auth endpoint', () => {
             };
 
             agent
-                .post('/auth')
+                .post('/eme-auth')
                 .send(postBody)
                 .expect(401)
                 .end((authErr, authRes) => {
