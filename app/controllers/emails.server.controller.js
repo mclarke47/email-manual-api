@@ -202,7 +202,7 @@ exports.patch = (req, res) => {
     }
 
     if (email.sendTime && !allowedPatchWhenScheduled(requestBody)) {
-        // If the email has been scheduled, we can only patch the sendTime or sent property
+        // If the email has been scheduled, we can only patch whitelisted properties
         return res.status(400).send({
             message: 'The email is already scheduled, the required property cannot be edited'
         });
@@ -307,11 +307,10 @@ exports.emailById = (req, res, next, id) => {
 
 
 function allowedPatchWhenScheduled (requestBody) {
-    // If the email has been scheduled, we only allow a PATCH with a single property.
-    // This property can either be 'sent' or 'sendTime' of 'failed'
-
-    let keys = Object.keys(requestBody);
-
-    return (keys.length === 1 && ['sendTime', 'sent', 'failed', 'outstanding', 'sendJobId'].indexOf(keys[0]) > -1);
+    
+    // If the email has been scheduled, we only allow a PATCH with whitelisted properties.
+    return Object.keys(requestBody).every((key) => {
+        return ['sendTime', 'sent', 'failed', 'outstanding', 'sendJobId'].indexOf(key) > -1;
+    });
 
 }
