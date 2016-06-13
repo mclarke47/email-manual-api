@@ -83,7 +83,7 @@ const emailSchema = new Schema({
         index: true
     },
     sendJobId: {
-        type: String
+        type: String,
         trim: true
     }
 });
