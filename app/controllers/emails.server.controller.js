@@ -76,6 +76,15 @@ exports.list = (req, res) => {
         options.pending = false;
         options.sendTime = { "$lte": Date.now() };
     }
+    
+    /**
+     * The "pending" filter
+     */
+    if (req.query.pending === '' || req.query.pending === 'true') {
+        options.pending = true;
+    } else if (req.query.pending === 'false') {
+        options.pending = false;
+    }
 
     res.header('X-Page', page + 1);
     res.header('X-Per-Page', perPage);
