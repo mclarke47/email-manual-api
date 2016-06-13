@@ -73,6 +73,7 @@ exports.list = (req, res) => {
     if (req.query.toSend === '' || req.query.toSend === 'true') {
         options.sent = false;
         options.failed = false;
+        options.pending = false;
         options.sendTime = { "$lte": Date.now() };
     }
 
