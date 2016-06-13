@@ -63,7 +63,7 @@ const emailSchema = new Schema({
         default: false,
         index: true
     },
-    pending: {
+    outstanding: {
         type: Boolean,
         default: false,
         index: true

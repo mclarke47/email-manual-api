@@ -73,17 +73,17 @@ exports.list = (req, res) => {
     if (req.query.toSend === '' || req.query.toSend === 'true') {
         options.sent = false;
         options.failed = false;
-        options.pending = false;
+        options.outstanding = false;
         options.sendTime = { "$lte": Date.now() };
     }
     
     /**
-     * The "pending" filter
+     * The "outstanding" filter
      */
-    if (req.query.pending === '' || req.query.pending === 'true') {
-        options.pending = true;
-    } else if (req.query.pending === 'false') {
-        options.pending = false;
+    if (req.query.outstanding === '' || req.query.outstanding === 'true') {
+        options.outstanding = true;
+    } else if (req.query.outstanding === 'false') {
+        options.outstanding = false;
     }
 
     res.header('X-Page', page + 1);
