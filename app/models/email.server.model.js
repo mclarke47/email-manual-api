@@ -81,6 +81,10 @@ const emailSchema = new Schema({
     sendTime: {
         type: Date,
         index: true
+    },
+    sendJobId: {
+        type: String,
+        trim: true
     }
 });
 
