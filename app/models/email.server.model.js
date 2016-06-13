@@ -63,6 +63,11 @@ const emailSchema = new Schema({
         default: false,
         index: true
     },
+    pending: {
+        type: Boolean,
+        default: false,
+        index: true
+    },
     toSubEdit: {
         type: Boolean,
         default: false,
